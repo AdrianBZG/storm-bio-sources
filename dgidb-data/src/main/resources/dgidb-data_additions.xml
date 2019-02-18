@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+<class name="DrugInteraction" is-interface="true">
+    <attribute name="type" type="java.lang.String"/>
+    <reference name="gene" referenced-type="Gene" reverse-reference="drugInteractions"/>
+    <reference name="drug" referenced-type="Drug" reverse-reference="drugInteractions"/>
+    <reference name="publication" referenced-type="Publication"/>
+    <collection name="dataSets" referenced-type="DataSet"/>
+</class>
+<class name="Drug" is-interface="true">
+    <attribute name="primaryIdentifier" type="java.lang.String"/>
+    <attribute name="name" type="java.lang.String"/>
+    <attribute name="source" type="java.lang.String"/>
+    <collection name="drugInteractions" referenced-type="DrugInteraction" reverse-reference="drug"/>
+    <collection name="dataSets" referenced-type="DataSet"/>
+</class>
+<class name="Gene" is-interface="true" extends="BioEntity">
+    <collection name="drugInteractions" referenced-type="DrugInteraction" reverse-reference="gene"/>
+</class>
+</classes>
