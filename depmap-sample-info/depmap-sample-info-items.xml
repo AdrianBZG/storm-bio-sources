@@ -1,0 +1,1204 @@
+<items>
+<item id="4_47" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="GCIY_STOMACH"/>
+<attribute name="DepMapID" value="ACH-000047"/>
+<attribute name="Disease" value="Gastric Cancer"/>
+<attribute name="DiseaseSubtype" value="Adenocarcinoma"/>
+<attribute name="Lineage" value="gastric"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="gastric_adenocarcinoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_64" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="SALE_LUNG"/>
+<attribute name="DepMapID" value="ACH-000064"/>
+<attribute name="Disease" value="Immortalized"/>
+<attribute name="DiseaseSubtype" value="Not specified"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="lung_immortalized"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Not specified"/>
+</item>
+<item id="4_75" class="CellLine">
+<attribute name="Age" value="44.0"/>
+<attribute name="CCLEname" value="U87MG_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000075"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Astrocytoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="astrocytoma"/>
+<attribute name="LineageSubtype" value="glioma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Not specified"/>
+</item>
+<item id="4_55" class="CellLine">
+<attribute name="Age" value="6.0"/>
+<attribute name="CCLEname" value="D283MED_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000055"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Medulloblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="med_group_3"/>
+<attribute name="LineageSubtype" value="medulloblastoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_25" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="CH157MN_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000025"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Meningioma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="meningioma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_70" class="CellLine">
+<attribute name="Age" value="12.0"/>
+<attribute name="CCLEname" value="697_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000070"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Lymphoblastic Leukemia (ALL), B-cell"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_ALL"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_61" class="CellLine">
+<attribute name="Age" value="61.0"/>
+<attribute name="CCLEname" value="HH_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000061"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="T-cell, Non-Hodgkins, Cutaneous"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="T-cell_lymphoma_other"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="0_1" class="Ontology">
+<attribute name="name" value="Sequence Ontology"/>
+<attribute name="url" value="http://www.sequenceontology.org"/>
+</item>
+<item id="4_24" class="CellLine">
+<attribute name="Age" value="56.0"/>
+<attribute name="CCLEname" value="OPM2_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000024"/>
+<attribute name="Disease" value="Myeloma"/>
+<attribute name="DiseaseSubtype" value="Multiple Myeloma"/>
+<attribute name="Lineage" value="multiple_myeloma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_79" class="CellLine">
+<attribute name="Age" value="1.0"/>
+<attribute name="CCLEname" value="TE125T_FIBROBLAST"/>
+<attribute name="DepMapID" value="ACH-000079"/>
+<attribute name="Disease" value="Fibroblast"/>
+<attribute name="DiseaseSubtype" value="Rhabdomyosarcoma"/>
+<attribute name="Lineage" value="fibroblast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_51" class="CellLine">
+<attribute name="Age" value="1.67"/>
+<attribute name="CCLEname" value="TE617T_SOFT_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000051"/>
+<attribute name="Disease" value="Sarcoma"/>
+<attribute name="DiseaseSubtype" value="Rhabdomyosarcoma"/>
+<attribute name="Lineage" value="rhabdomyosarcoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_78" class="CellLine">
+<attribute name="Age" value="4.0"/>
+<attribute name="CCLEname" value="MHHNB11_AUTONOMIC_GANGLIA"/>
+<attribute name="DepMapID" value="ACH-000078"/>
+<attribute name="Disease" value="Neuroblastoma"/>
+<attribute name="DiseaseSubtype" value="Unknown"/>
+<attribute name="Lineage" value="peripheral_nervous_system"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="neuroblastoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_67" class="CellLine">
+<attribute name="Age" value="76.0"/>
+<attribute name="CCLEname" value="HS683_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000067"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Oligodendroglioma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="oligodendroglioma"/>
+<attribute name="LineageSubtype" value="glioma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_28" class="CellLine">
+<attribute name="Age" value="50.0"/>
+<attribute name="CCLEname" value="KPL1_BREAST"/>
+<attribute name="DepMapID" value="ACH-000028"/>
+<attribute name="Disease" value="Breast Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="breast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="ERpos"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_37" class="CellLine">
+<attribute name="Age" value="47.0"/>
+<attribute name="CCLEname" value="S117_THYROID"/>
+<attribute name="DepMapID" value="ACH-000037"/>
+<attribute name="Disease" value="Sarcoma"/>
+<attribute name="DiseaseSubtype" value="Unknown"/>
+<attribute name="Lineage" value="thyroid"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="thyroid_sarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_59" class="CellLine">
+<attribute name="Age" value="9.0"/>
+<attribute name="CCLEname" value="SUPB15_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000059"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Lymphoblastic Leukemia (ALL), B-cell"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_ALL"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_82" class="CellLine">
+<attribute name="Age" value="9.0"/>
+<attribute name="CCLEname" value="G292CLONEA141B1_BONE"/>
+<attribute name="DepMapID" value="ACH-000082"/>
+<attribute name="Disease" value="Bone Cancer"/>
+<attribute name="DiseaseSubtype" value="Osteosarcoma"/>
+<attribute name="Lineage" value="bone"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="osteosarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_34" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="PLB985_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000034"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_89" class="CellLine">
+<attribute name="Age" value="55.0"/>
+<attribute name="CCLEname" value="NCIH684_LARGE_INTESTINE"/>
+<attribute name="DepMapID" value="ACH-000089"/>
+<attribute name="Disease" value="Colon/Colorectal Cancer"/>
+<attribute name="DiseaseSubtype" value="Colon Adenocarcinoma"/>
+<attribute name="Lineage" value="colorectal"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_14" class="CellLine">
+<attribute name="Age" value="56.0"/>
+<attribute name="CCLEname" value="HS294T_SKIN"/>
+<attribute name="DepMapID" value="ACH-000014"/>
+<attribute name="Disease" value="Skin Cancer"/>
+<attribute name="DiseaseSubtype" value="Melanoma"/>
+<attribute name="Lineage" value="skin"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="melanoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_91" class="CellLine">
+<attribute name="Age" value="46.0"/>
+<attribute name="CCLEname" value="OV56_OVARY"/>
+<attribute name="DepMapID" value="ACH-000091"/>
+<attribute name="Disease" value="Ovarian Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma, serous"/>
+<attribute name="Lineage" value="ovary"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="ovary_adenocarcinoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_3" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="CACO2_LARGE_INTESTINE"/>
+<attribute name="DepMapID" value="ACH-000003"/>
+<attribute name="Disease" value="Colon/Colorectal Cancer"/>
+<attribute name="DiseaseSubtype" value="Colon Adenocarcinoma"/>
+<attribute name="Lineage" value="colorectal"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_29" class="CellLine">
+<attribute name="Age" value="39.0"/>
+<attribute name="CCLEname" value="HCC827GR5_LUNG"/>
+<attribute name="DepMapID" value="ACH-000029"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_84" class="CellLine">
+<attribute name="Age" value="29.0"/>
+<attribute name="CCLEname" value="MUTZ3_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000084"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_18" class="CellLine">
+<attribute name="Age" value="81.0"/>
+<attribute name="CCLEname" value="T24_URINARY_TRACT"/>
+<attribute name="DepMapID" value="ACH-000018"/>
+<attribute name="Disease" value="Bladder Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="urinary_tract"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_57" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="OPM1_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000057"/>
+<attribute name="Disease" value="Myeloma"/>
+<attribute name="DiseaseSubtype" value="Multiple Myeloma"/>
+<attribute name="Lineage" value="multiple_myeloma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_85" class="CellLine">
+<attribute name="Age" value="64.0"/>
+<attribute name="CCLEname" value="T3M4_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000085"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Ductal Adenocarcinoma, exocrine"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_44" class="CellLine">
+<attribute name="Age" value="47.0"/>
+<attribute name="CCLEname" value="MDAMB134VI_BREAST"/>
+<attribute name="DepMapID" value="ACH-000044"/>
+<attribute name="Disease" value="Breast Cancer"/>
+<attribute name="DiseaseSubtype" value="Breast Ductal Carcinoma"/>
+<attribute name="Lineage" value="breast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="ERpos"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_32" class="CellLine">
+<attribute name="Age" value="11.0"/>
+<attribute name="CCLEname" value="MHHCALL3_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000032"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Lymphoblastic Leukemia (ALL), B-cell"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_ALL"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_43" class="CellLine">
+<attribute name="Age" value="48.0"/>
+<attribute name="CCLEname" value="HS895T_FIBROBLAST"/>
+<attribute name="DepMapID" value="ACH-000043"/>
+<attribute name="Disease" value="Fibroblast"/>
+<attribute name="DiseaseSubtype" value="Malignant melanoma"/>
+<attribute name="Lineage" value="fibroblast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_46" class="CellLine">
+<attribute name="Age" value="22.0"/>
+<attribute name="CCLEname" value="ACHN_KIDNEY"/>
+<attribute name="DepMapID" value="ACH-000046"/>
+<attribute name="Disease" value="Kidney Cancer"/>
+<attribute name="DiseaseSubtype" value="Renal Cell Adenocarcinoma"/>
+<attribute name="Lineage" value="kidney"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_11" class="CellLine">
+<attribute name="Age" value="53.0"/>
+<attribute name="CCLEname" value="253J_URINARY_TRACT"/>
+<attribute name="DepMapID" value="ACH-000011"/>
+<attribute name="Disease" value="Bladder Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="urinary_tract"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_8" class="CellLine">
+<attribute name="Age" value="56.0"/>
+<attribute name="CCLEname" value="A101D_SKIN"/>
+<attribute name="DepMapID" value="ACH-000008"/>
+<attribute name="Disease" value="Skin Cancer"/>
+<attribute name="DiseaseSubtype" value="Melanoma"/>
+<attribute name="Lineage" value="Not specified"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_69" class="CellLine">
+<attribute name="Age" value="48.0"/>
+<attribute name="CCLEname" value="HS611T_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000069"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="B-cell, Hodgkins"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Hodgkin_lymphoma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_74" class="CellLine">
+<attribute name="Age" value="38.0"/>
+<attribute name="CCLEname" value="KU812_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000074"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Chronic Myelogenous Leukemia (CML), blast crisis"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="CML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_58" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="ML1_THYROID"/>
+<attribute name="DepMapID" value="ACH-000058"/>
+<attribute name="Disease" value="Thyroid Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma, follicular"/>
+<attribute name="Lineage" value="thyroid"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Not specified"/>
+</item>
+<item id="4_86" class="CellLine">
+<attribute name="Age" value="61.0"/>
+<attribute name="CCLEname" value="ACCMESO1_PLEURA"/>
+<attribute name="DepMapID" value="ACH-000086"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Mesothelioma"/>
+<attribute name="Lineage" value="mesothelioma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_17" class="CellLine">
+<attribute name="Age" value="43.0"/>
+<attribute name="CCLEname" value="SKBR3_BREAST"/>
+<attribute name="DepMapID" value="ACH-000017"/>
+<attribute name="Disease" value="Breast Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="breast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="HER2Amp"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_50" class="CellLine">
+<attribute name="Age" value="62.0"/>
+<attribute name="CCLEname" value="NCIH929_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000050"/>
+<attribute name="Disease" value="Myeloma"/>
+<attribute name="DiseaseSubtype" value="Multiple Myeloma, plasmacytoma"/>
+<attribute name="Lineage" value="multiple_myeloma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_30" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="PC14_LUNG"/>
+<attribute name="DepMapID" value="ACH-000030"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_20" class="CellLine">
+<attribute name="Age" value="15.0"/>
+<attribute name="CCLEname" value="MHHCALL2_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000020"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Lymphoblastic Leukemia (ALL), B-cell"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_ALL"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_45" class="CellLine">
+<attribute name="Age" value="10.0"/>
+<attribute name="CCLEname" value="MV411_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000045"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_19" class="CellLine">
+<attribute name="Age" value="69.0"/>
+<attribute name="CCLEname" value="MCF7_BREAST"/>
+<attribute name="DepMapID" value="ACH-000019"/>
+<attribute name="Disease" value="Breast Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="breast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="ERpos"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_38" class="CellLine">
+<attribute name="Age" value="69.0"/>
+<attribute name="CCLEname" value="EHEB_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000038"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Chronic Lymphoblastic Leukemia (CLL), B-cell"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_lymphoma_other"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_10" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="NCIH2077_LUNG"/>
+<attribute name="DepMapID" value="ACH-000010"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_31" class="CellLine">
+<attribute name="Age" value="64.0"/>
+<attribute name="CCLEname" value="PANC0213_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000031"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Ductal Adenocarcinoma, exocrine"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_94" class="CellLine">
+<attribute name="Age" value="44.0"/>
+<attribute name="CCLEname" value="HPAFII_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000094"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_92" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="NCIH2452_PLEURA"/>
+<attribute name="DepMapID" value="ACH-000092"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Mesothelioma"/>
+<attribute name="Lineage" value="mesothelioma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_9" class="CellLine">
+<attribute name="Age" value="72.0"/>
+<attribute name="CCLEname" value="C2BBE1_LARGE_INTESTINE"/>
+<attribute name="DepMapID" value="ACH-000009"/>
+<attribute name="Disease" value="Colon/Colorectal Cancer"/>
+<attribute name="DiseaseSubtype" value="Colon Adenocarcinoma"/>
+<attribute name="Lineage" value="colorectal"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_16" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="SLR21_KIDNEY"/>
+<attribute name="DepMapID" value="ACH-000016"/>
+<attribute name="Disease" value="Kidney Cancer"/>
+<attribute name="DiseaseSubtype" value="Renal Cell Carcinoma"/>
+<attribute name="Lineage" value="kidney"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Not specified"/>
+</item>
+<item id="4_36" class="CellLine">
+<attribute name="Age" value="64.0"/>
+<attribute name="CCLEname" value="U343_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000036"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Glioblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="glioblastoma"/>
+<attribute name="LineageSubtype" value="glioma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Not specified"/>
+</item>
+<item id="4_96" class="CellLine">
+<attribute name="Age" value="0.25"/>
+<attribute name="CCLEname" value="G401_SOFT_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000096"/>
+<attribute name="Disease" value="Rhabdoid"/>
+<attribute name="DiseaseSubtype" value="Malignant Rhabdoid Tumor"/>
+<attribute name="Lineage" value="rhabdoid"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_1" class="CellLine">
+<attribute name="Age" value="60.0"/>
+<attribute name="CCLEname" value="NIHOVCAR3_OVARY"/>
+<attribute name="DepMapID" value="ACH-000001"/>
+<attribute name="Disease" value="Ovarian Cancer"/>
+<attribute name="DiseaseSubtype" value="Adenocarcinoma, high grade serous"/>
+<attribute name="Lineage" value="ovary"/>
+<attribute name="LineageSubsubtype" value="ovary_high_grade_serous"/>
+<attribute name="LineageSubtype" value="ovary_adenocarcinoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_88" class="CellLine">
+<attribute name="Age" value="50.0"/>
+<attribute name="CCLEname" value="HS172T_FIBROBLAST"/>
+<attribute name="DepMapID" value="ACH-000088"/>
+<attribute name="Disease" value="Fibroblast"/>
+<attribute name="DiseaseSubtype" value="Urinary tract"/>
+<attribute name="Lineage" value="fibroblast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_49" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="HEKTE_KIDNEY"/>
+<attribute name="DepMapID" value="ACH-000049"/>
+<attribute name="Disease" value="Immortalized"/>
+<attribute name="DiseaseSubtype" value="Not specified"/>
+<attribute name="Lineage" value="kidney"/>
+<attribute name="LineageSubsubtype" value="renal_immortalized"/>
+<attribute name="LineageSubtype" value="renal"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Not specified"/>
+</item>
+<item id="4_83" class="CellLine">
+<attribute name="Age" value="37.0"/>
+<attribute name="CCLEname" value="HS281T_FIBROBLAST"/>
+<attribute name="DepMapID" value="ACH-000083"/>
+<attribute name="Disease" value="Fibroblast"/>
+<attribute name="DiseaseSubtype" value="Breast"/>
+<attribute name="Lineage" value="fibroblast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_4" class="CellLine">
+<attribute name="Age" value="30.0"/>
+<attribute name="CCLEname" value="HEL_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000004"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML), M6 (Erythroleukemia)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_99" class="CellLine">
+<attribute name="Age" value="1.6666"/>
+<attribute name="CCLEname" value="SIMA_AUTONOMIC_GANGLIA"/>
+<attribute name="DepMapID" value="ACH-000099"/>
+<attribute name="Disease" value="Neuroblastoma"/>
+<attribute name="DiseaseSubtype" value="Unknown"/>
+<attribute name="Lineage" value="peripheral_nervous_system"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="neuroblastoma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_56" class="CellLine">
+<attribute name="Age" value="60.0"/>
+<attribute name="CCLEname" value="DOHH2_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000056"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="Diffuse Large B-cell Lymphoma (DLBCL)"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="DLBCL"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="1_1" class="DataSource">
+<attribute name="name" value="DepMap Public 19Q3"/>
+</item>
+<item id="4_60" class="CellLine">
+<attribute name="Age" value="56.0"/>
+<attribute name="CCLEname" value="PANC1005_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000060"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="3_1" class="Organism">
+<attribute name="taxonId" value="9606"/>
+</item>
+<item id="4_73" class="CellLine">
+<attribute name="Age" value="58.0"/>
+<attribute name="CCLEname" value="GRANTA519_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000073"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="B-cell, Non-Hodgkins, Mantle Cell"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_lymphoma_other"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="2_1" class="DataSet">
+<attribute name="name" value="DepMap Sample Info"/>
+<reference name="dataSource" ref_id="1_1"/>
+</item>
+<item id="4_71" class="CellLine">
+<attribute name="Age" value="16.0"/>
+<attribute name="CCLEname" value="HS706T_BONE"/>
+<attribute name="DepMapID" value="ACH-000071"/>
+<attribute name="Disease" value="Fibroblast"/>
+<attribute name="DiseaseSubtype" value="Giant cell tumor"/>
+<attribute name="Lineage" value="fibroblast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_98" class="CellLine">
+<attribute name="Age" value="42.0"/>
+<attribute name="CCLEname" value="GAMG_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000098"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Glioblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="glioblastoma"/>
+<attribute name="LineageSubtype" value="glioma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_93" class="CellLine">
+<attribute name="Age" value="77.0"/>
+<attribute name="CCLEname" value="PANC0504_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000093"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_27" class="CellLine">
+<attribute name="Age" value="55.0"/>
+<attribute name="CCLEname" value="GOS3_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000027"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Glioblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="glioblastoma"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_41" class="CellLine">
+<attribute name="Age" value="19.0"/>
+<attribute name="CCLEname" value="RDES_BONE"/>
+<attribute name="DepMapID" value="ACH-000041"/>
+<attribute name="Disease" value="Bone Cancer"/>
+<attribute name="DiseaseSubtype" value="Ewings Sarcoma"/>
+<attribute name="Lineage" value="bone"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Ewing_sarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_42" class="CellLine">
+<attribute name="Age" value="70.0"/>
+<attribute name="CCLEname" value="PANC0203_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000042"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Ductal Adenocarcinoma, exocrine"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_2" class="CellLine">
+<attribute name="Age" value="35.0"/>
+<attribute name="CCLEname" value="HL60_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000002"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML), M3 (Promyelocytic)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_21" class="CellLine">
+<attribute name="Age" value="55.0"/>
+<attribute name="CCLEname" value="NCIH1693_LUNG"/>
+<attribute name="DepMapID" value="ACH-000021"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_87" class="CellLine">
+<attribute name="Age" value="18.0"/>
+<attribute name="CCLEname" value="SKES1_BONE"/>
+<attribute name="DepMapID" value="ACH-000087"/>
+<attribute name="Disease" value="Bone Cancer"/>
+<attribute name="DiseaseSubtype" value="Ewings Sarcoma"/>
+<attribute name="Lineage" value="bone"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Ewing_sarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_22" class="CellLine">
+<attribute name="Age" value="64.0"/>
+<attribute name="CCLEname" value="PATU8988S_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000022"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Ductal Adenocarcinoma, exocrine"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_80" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="BDCM_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000080"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML), M5 (Eosinophilic)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_ALL"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_66" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="HCC4006_LUNG"/>
+<attribute name="DepMapID" value="ACH-000066"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_33" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="NCIH1819_LUNG"/>
+<attribute name="DepMapID" value="ACH-000033"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_39" class="CellLine">
+<attribute name="Age" value="14.0"/>
+<attribute name="CCLEname" value="SKNMC_BONE"/>
+<attribute name="DepMapID" value="ACH-000039"/>
+<attribute name="Disease" value="Bone Cancer"/>
+<attribute name="DiseaseSubtype" value="Ewings Sarcoma"/>
+<attribute name="Lineage" value="bone"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Ewing_sarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_12" class="CellLine">
+<attribute name="Age" value="39.0"/>
+<attribute name="CCLEname" value="HCC827_LUNG"/>
+<attribute name="DepMapID" value="ACH-000012"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_48" class="CellLine">
+<attribute name="Age" value="42.0"/>
+<attribute name="CCLEname" value="TOV112D_OVARY"/>
+<attribute name="DepMapID" value="ACH-000048"/>
+<attribute name="Disease" value="Ovarian Cancer"/>
+<attribute name="DiseaseSubtype" value="Adenocarcinoma, endometrioid"/>
+<attribute name="Lineage" value="ovary"/>
+<attribute name="LineageSubsubtype" value="ovary_endometrioid"/>
+<attribute name="LineageSubtype" value="ovary_adenocarcinoma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_40" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="U118MG_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000040"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Glioblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="astrocytoma"/>
+<attribute name="LineageSubtype" value="glioma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_81" class="CellLine">
+<attribute name="Age" value="66.0"/>
+<attribute name="CCLEname" value="GDM1_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000081"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_68" class="CellLine">
+<attribute name="Age" value="61.0"/>
+<attribute name="CCLEname" value="REC1_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000068"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="B-cell, Non-Hodgkins, Mantle Cell"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="B-cell_lymphoma_other"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_13" class="CellLine">
+<attribute name="Age" value="60.0"/>
+<attribute name="CCLEname" value="ONCODG1_OVARY"/>
+<attribute name="DepMapID" value="ACH-000013"/>
+<attribute name="Disease" value="Ovarian Cancer"/>
+<attribute name="DiseaseSubtype" value="Adenocarcinoma, high grade serous"/>
+<attribute name="Lineage" value="ovary"/>
+<attribute name="LineageSubsubtype" value="ovary_high_grade_serous"/>
+<attribute name="LineageSubtype" value="ovary_adenocarcinoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_72" class="CellLine">
+<attribute name="Age" value="55.0"/>
+<attribute name="CCLEname" value="MEG01_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000072"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Chronic Myelogenous Leukemia (CML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="CML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_65" class="CellLine">
+<attribute name="Age" value="77.0"/>
+<attribute name="CCLEname" value="OCIAML5_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000065"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_63" class="CellLine">
+<attribute name="Age" value="16.0"/>
+<attribute name="CCLEname" value="HS616T_FIBROBLAST"/>
+<attribute name="DepMapID" value="ACH-000063"/>
+<attribute name="Disease" value="Fibroblast"/>
+<attribute name="DiseaseSubtype" value="B-Cell, Hodgkins Lymphoma"/>
+<attribute name="Lineage" value="fibroblast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_5" class="CellLine">
+<attribute name="Age" value="30.0"/>
+<attribute name="CCLEname" value="HEL9217_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000005"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML), M6 (Erythroleukemia)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_15" class="CellLine">
+<attribute name="Age" value="44.0"/>
+<attribute name="CCLEname" value="NCIH1581_LUNG"/>
+<attribute name="DepMapID" value="ACH-000015"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Large Cell Carcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_large"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_97" class="CellLine">
+<attribute name="Age" value="63.0"/>
+<attribute name="CCLEname" value="ZR751_BREAST"/>
+<attribute name="DepMapID" value="ACH-000097"/>
+<attribute name="Disease" value="Breast Cancer"/>
+<attribute name="DiseaseSubtype" value="Breast Ductal Carcinoma"/>
+<attribute name="Lineage" value="breast"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="ERpos"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_54" class="CellLine">
+<attribute name="Age" value="35.0"/>
+<attribute name="CCLEname" value="HT1080_SOFT_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000054"/>
+<attribute name="Disease" value="Sarcoma"/>
+<attribute name="DiseaseSubtype" value="Fibrosarcoma"/>
+<attribute name="Lineage" value="soft_tissue"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="fibrosarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_52" class="CellLine">
+<attribute name="Age" value="15.0"/>
+<attribute name="CCLEname" value="A673_BONE"/>
+<attribute name="DepMapID" value="ACH-000052"/>
+<attribute name="Disease" value="Bone Cancer"/>
+<attribute name="DiseaseSubtype" value="Ewings Sarcoma"/>
+<attribute name="Lineage" value="bone"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Ewing_sarcoma"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_77" class="CellLine">
+<attribute name="Age" value="50.0"/>
+<attribute name="CCLEname" value="MJ_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000077"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="T-cell, Non-Hodgkins, Cutaneous"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="T-cell_lymphoma_other"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_53" class="CellLine">
+<attribute name="Age" value="25.0"/>
+<attribute name="CCLEname" value="KARPAS299_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000053"/>
+<attribute name="Disease" value="Lymphoma"/>
+<attribute name="DiseaseSubtype" value="T-cell, Non-Hodgkins, Anaplastic Large Cell (ALCL)"/>
+<attribute name="Lineage" value="lymphoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="ALCL"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_90" class="CellLine">
+<attribute name="Age" value="62.0"/>
+<attribute name="CCLEname" value="PC3_PROSTATE"/>
+<attribute name="DepMapID" value="ACH-000090"/>
+<attribute name="Disease" value="Prostate Cancer"/>
+<attribute name="DiseaseSubtype" value="Adenocarcinoma"/>
+<attribute name="Lineage" value="prostate"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_23" class="CellLine">
+<attribute name="Age" value="64.0"/>
+<attribute name="CCLEname" value="PATU8988T_PANCREAS"/>
+<attribute name="DepMapID" value="ACH-000023"/>
+<attribute name="Disease" value="Pancreatic Cancer"/>
+<attribute name="DiseaseSubtype" value="Ductal Adenocarcinoma, exocrine"/>
+<attribute name="Lineage" value="pancreas"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_6" class="CellLine">
+<attribute name="Age" value="64.0"/>
+<attribute name="CCLEname" value="MONOMAC6_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000006"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Acute Myelogenous Leukemia (AML), M5 (Monocytic)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="AML"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_7" class="CellLine">
+<attribute name="Age" value="63.0"/>
+<attribute name="CCLEname" value="LS513_LARGE_INTESTINE"/>
+<attribute name="DepMapID" value="ACH-000007"/>
+<attribute name="Disease" value="Colon/Colorectal Cancer"/>
+<attribute name="DiseaseSubtype" value="Colon Carcinoma"/>
+<attribute name="Lineage" value="colorectal"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_26" class="CellLine">
+<attribute name="Age" value="53.0"/>
+<attribute name="CCLEname" value="253JBV_URINARY_TRACT"/>
+<attribute name="DepMapID" value="ACH-000026"/>
+<attribute name="Disease" value="Bladder Cancer"/>
+<attribute name="DiseaseSubtype" value="Carcinoma"/>
+<attribute name="Lineage" value="urinary_tract"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_76" class="CellLine">
+<attribute name="Age" value="35.0"/>
+<attribute name="CCLEname" value="NCO2_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000076"/>
+<attribute name="Disease" value="Leukemia"/>
+<attribute name="DiseaseSubtype" value="Chronic Myelogenous Leukemia (CML)"/>
+<attribute name="Lineage" value="leukemia"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="CML"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Female"/>
+</item>
+<item id="4_62" class="CellLine">
+<attribute name="Age" value="Not specified"/>
+<attribute name="CCLEname" value="RERFLCMS_LUNG"/>
+<attribute name="DepMapID" value="ACH-000062"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Adenocarcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_95" class="CellLine">
+<attribute name="Age" value="3.5"/>
+<attribute name="CCLEname" value="D341MED_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000095"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Medulloblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="med_group_3"/>
+<attribute name="LineageSubtype" value="medulloblastoma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
+</item>
+<item id="4_35" class="CellLine">
+<attribute name="Age" value="27.0"/>
+<attribute name="CCLEname" value="NCIH1650_LUNG"/>
+<attribute name="DepMapID" value="ACH-000035"/>
+<attribute name="Disease" value="Lung Cancer"/>
+<attribute name="DiseaseSubtype" value="Non-Small Cell Lung Cancer (NSCLC), Bronchoalveolar Carcinoma"/>
+<attribute name="Lineage" value="lung"/>
+<attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
+<attribute name="LineageSubtype" value="lung_NSC"/>
+<attribute name="PrimaryOrMetastasis" value="Metastasis"/>
+<attribute name="Sex" value="Male"/>
+</item>
+</items>

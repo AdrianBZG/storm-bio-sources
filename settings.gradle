@@ -1,3 +1,9 @@
 rootProject.name = 'bio-sources-storm'
 include ':bio-source-dgidb-data'
 project(':bio-source-dgidb-data').projectDir = new File(settingsDir, './dgidb-data')
+include ':bio-source-depmap-sample-info'
+project(':bio-source-depmap-sample-info').projectDir = new File(settingsDir, './depmap-sample-info')
+include ':bio-source-depmap-cnv'
+project(':bio-source-depmap-cnv').projectDir = new File(settingsDir, './depmap-cnv')
+include ':bio-source-depmap-expression'
+project(':bio-source-depmap-expression').projectDir = new File(settingsDir, './depmap-expression')
