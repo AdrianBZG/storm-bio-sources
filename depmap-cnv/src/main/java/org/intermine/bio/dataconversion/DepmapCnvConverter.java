@@ -90,13 +90,13 @@ public class DepmapCnvConverter extends BioDirectoryConverter
             String cellLine = line[0];
             for(int i = 1; i < line.length; i++) {
                 String cnvValue = line[i];
-                String theGeneForThisItem = genes.get(i);
+                String theGeneForThisItem = genes.get(i-1);
                 Item CopyNumberItem;
 
                 CopyNumberItem = createItem("DepMapCopyNumber");
 
                 if(!cellLine.isEmpty()) {
-                    CopyNumberItem.setReference("DepMapID", getCellLine(cellLine));
+                    CopyNumberItem.setReference("depMapID", getCellLine(cellLine));
                 } else {
                     continue;
                 }
@@ -136,17 +136,17 @@ public class DepmapCnvConverter extends BioDirectoryConverter
     }
 
     public String getCellLine(String identifier) {
-        String refId = genes.get(identifier);
+        String refId = cellLines.get(identifier);
         if (refId == null) {
-            Item gene = createItem("CellLine");
-            gene.setAttribute("DepMapID", identifier);
+            Item cl = createItem("CellLine");
+            cl.setAttribute("DepMapID", identifier);
             try {
-                store(gene);
+                store(cl);
             } catch (ObjectStoreException e) {
                 throw new RuntimeException("failed to store cell line with DepMapID: " + identifier, e);
             }
-            refId = gene.getIdentifier();
-            genes.put(identifier, refId);
+            refId = cl.getIdentifier();
+            cellLines.put(identifier, refId);
         }
         return refId;
     }

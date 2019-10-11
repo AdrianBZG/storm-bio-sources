@@ -12,7 +12,7 @@ executeLog*
 *.class
 productionLog
 *~
-
+*.csv
 
 # IDEs
 nbproject/

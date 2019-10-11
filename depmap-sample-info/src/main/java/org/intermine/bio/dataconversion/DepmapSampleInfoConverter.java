@@ -82,6 +82,7 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
         while (lineIter.hasNext()) {
             String[] line = (String[]) lineIter.next();
 
+            System.out.println("hello?");
             System.out.println(line);
 
             String DepMapID = line[0];
@@ -93,12 +94,11 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             String PrimaryOrMetastasis = line[17];
             String Disease = line[18];
             String DiseaseSubtype = line[19];
-            String Age;
-            try {
-                Age = String.valueOf(line[20]);
-            } catch (Exception e) {
-                Age = "Not specified";
+            String Age = "Not specified";
+            if(!line[20].isEmpty()) {
+                Age = Double.toString(Math.floor(Double.valueOf(line[20])));
             }
+
             /*if(!line[20].isEmpty()) {
                 Age = Double.parseDouble(line[20]);
             }*/

@@ -47,6 +47,18 @@
 <attribute name="PrimaryOrMetastasis" value="Metastasis"/>
 <attribute name="Sex" value="Male"/>
 </item>
+<item id="4_51" class="CellLine">
+<attribute name="Age" value="1.0"/>
+<attribute name="CCLEname" value="TE617T_SOFT_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000051"/>
+<attribute name="Disease" value="Sarcoma"/>
+<attribute name="DiseaseSubtype" value="Rhabdomyosarcoma"/>
+<attribute name="Lineage" value="rhabdomyosarcoma"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Female"/>
+</item>
 <item id="4_25" class="CellLine">
 <attribute name="Age" value="Not specified"/>
 <attribute name="CCLEname" value="CH157MN_CENTRAL_NERVOUS_SYSTEM"/>
@@ -109,18 +121,6 @@
 <attribute name="LineageSubsubtype" value="Not specified"/>
 <attribute name="LineageSubtype" value="Not specified"/>
 <attribute name="PrimaryOrMetastasis" value="Not specified"/>
-<attribute name="Sex" value="Female"/>
-</item>
-<item id="4_51" class="CellLine">
-<attribute name="Age" value="1.67"/>
-<attribute name="CCLEname" value="TE617T_SOFT_TISSUE"/>
-<attribute name="DepMapID" value="ACH-000051"/>
-<attribute name="Disease" value="Sarcoma"/>
-<attribute name="DiseaseSubtype" value="Rhabdomyosarcoma"/>
-<attribute name="Lineage" value="rhabdomyosarcoma"/>
-<attribute name="LineageSubsubtype" value="Not specified"/>
-<attribute name="LineageSubtype" value="Not specified"/>
-<attribute name="PrimaryOrMetastasis" value="Primary"/>
 <attribute name="Sex" value="Female"/>
 </item>
 <item id="4_78" class="CellLine">
@@ -603,18 +603,6 @@
 <attribute name="PrimaryOrMetastasis" value="Not specified"/>
 <attribute name="Sex" value="Not specified"/>
 </item>
-<item id="4_96" class="CellLine">
-<attribute name="Age" value="0.25"/>
-<attribute name="CCLEname" value="G401_SOFT_TISSUE"/>
-<attribute name="DepMapID" value="ACH-000096"/>
-<attribute name="Disease" value="Rhabdoid"/>
-<attribute name="DiseaseSubtype" value="Malignant Rhabdoid Tumor"/>
-<attribute name="Lineage" value="rhabdoid"/>
-<attribute name="LineageSubsubtype" value="Not specified"/>
-<attribute name="LineageSubtype" value="Not specified"/>
-<attribute name="PrimaryOrMetastasis" value="Primary"/>
-<attribute name="Sex" value="Male"/>
-</item>
 <item id="4_1" class="CellLine">
 <attribute name="Age" value="60.0"/>
 <attribute name="CCLEname" value="NIHOVCAR3_OVARY"/>
@@ -675,15 +663,15 @@
 <attribute name="PrimaryOrMetastasis" value="Not specified"/>
 <attribute name="Sex" value="Male"/>
 </item>
-<item id="4_99" class="CellLine">
-<attribute name="Age" value="1.6666"/>
-<attribute name="CCLEname" value="SIMA_AUTONOMIC_GANGLIA"/>
-<attribute name="DepMapID" value="ACH-000099"/>
-<attribute name="Disease" value="Neuroblastoma"/>
-<attribute name="DiseaseSubtype" value="Unknown"/>
-<attribute name="Lineage" value="peripheral_nervous_system"/>
-<attribute name="LineageSubsubtype" value="Not specified"/>
-<attribute name="LineageSubtype" value="neuroblastoma"/>
+<item id="4_95" class="CellLine">
+<attribute name="Age" value="3.0"/>
+<attribute name="CCLEname" value="D341MED_CENTRAL_NERVOUS_SYSTEM"/>
+<attribute name="DepMapID" value="ACH-000095"/>
+<attribute name="Disease" value="Brain Cancer"/>
+<attribute name="DiseaseSubtype" value="Medulloblastoma"/>
+<attribute name="Lineage" value="central_nervous_system"/>
+<attribute name="LineageSubsubtype" value="med_group_3"/>
+<attribute name="LineageSubtype" value="medulloblastoma"/>
 <attribute name="PrimaryOrMetastasis" value="Not specified"/>
 <attribute name="Sex" value="Male"/>
 </item>
@@ -745,6 +733,18 @@
 <attribute name="PrimaryOrMetastasis" value="Not specified"/>
 <attribute name="Sex" value="Female"/>
 </item>
+<item id="4_96" class="CellLine">
+<attribute name="Age" value="0.0"/>
+<attribute name="CCLEname" value="G401_SOFT_TISSUE"/>
+<attribute name="DepMapID" value="ACH-000096"/>
+<attribute name="Disease" value="Rhabdoid"/>
+<attribute name="DiseaseSubtype" value="Malignant Rhabdoid Tumor"/>
+<attribute name="Lineage" value="rhabdoid"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="Not specified"/>
+<attribute name="PrimaryOrMetastasis" value="Primary"/>
+<attribute name="Sex" value="Male"/>
+</item>
 <item id="4_98" class="CellLine">
 <attribute name="Age" value="42.0"/>
 <attribute name="CCLEname" value="GAMG_CENTRAL_NERVOUS_SYSTEM"/>
@@ -804,6 +804,18 @@
 <attribute name="LineageSubtype" value="Not specified"/>
 <attribute name="PrimaryOrMetastasis" value="Primary"/>
 <attribute name="Sex" value="Female"/>
+</item>
+<item id="4_99" class="CellLine">
+<attribute name="Age" value="1.0"/>
+<attribute name="CCLEname" value="SIMA_AUTONOMIC_GANGLIA"/>
+<attribute name="DepMapID" value="ACH-000099"/>
+<attribute name="Disease" value="Neuroblastoma"/>
+<attribute name="DiseaseSubtype" value="Unknown"/>
+<attribute name="Lineage" value="peripheral_nervous_system"/>
+<attribute name="LineageSubsubtype" value="Not specified"/>
+<attribute name="LineageSubtype" value="neuroblastoma"/>
+<attribute name="PrimaryOrMetastasis" value="Not specified"/>
+<attribute name="Sex" value="Male"/>
 </item>
 <item id="4_2" class="CellLine">
 <attribute name="Age" value="35.0"/>
@@ -1175,18 +1187,6 @@
 <attribute name="LineageSubsubtype" value="lung_adenocarcinoma"/>
 <attribute name="LineageSubtype" value="lung_NSC"/>
 <attribute name="PrimaryOrMetastasis" value="Primary"/>
-<attribute name="Sex" value="Male"/>
-</item>
-<item id="4_95" class="CellLine">
-<attribute name="Age" value="3.5"/>
-<attribute name="CCLEname" value="D341MED_CENTRAL_NERVOUS_SYSTEM"/>
-<attribute name="DepMapID" value="ACH-000095"/>
-<attribute name="Disease" value="Brain Cancer"/>
-<attribute name="DiseaseSubtype" value="Medulloblastoma"/>
-<attribute name="Lineage" value="central_nervous_system"/>
-<attribute name="LineageSubsubtype" value="med_group_3"/>
-<attribute name="LineageSubtype" value="medulloblastoma"/>
-<attribute name="PrimaryOrMetastasis" value="Not specified"/>
 <attribute name="Sex" value="Male"/>
 </item>
 <item id="4_35" class="CellLine">
