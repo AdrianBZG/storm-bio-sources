@@ -123,7 +123,7 @@ public class DepmapCnvConverter extends BioDirectoryConverter
         String refId = genes.get(identifier);
         if (refId == null) {
             Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", identifier);
+            gene.setAttribute("symbol", identifier);
             try {
                 store(gene);
             } catch (ObjectStoreException e) {

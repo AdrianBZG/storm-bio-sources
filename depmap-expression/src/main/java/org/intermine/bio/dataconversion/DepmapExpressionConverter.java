@@ -92,7 +92,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
             String cellLine = line[0];
             for(int i = 1; i < line.length; i++) {
                 String expressionValue = line[i];
-                String theGeneForThisItem = genes.get(i);
+                String theGeneForThisItem = genes.get(i-1);
                 Item ExpressionItem;
 
                 ExpressionItem = createItem("DepMapExpression");
@@ -125,7 +125,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         String refId = genes.get(identifier);
         if (refId == null) {
             Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", identifier);
+            gene.setAttribute("symbol", identifier);
             try {
                 store(gene);
             } catch (ObjectStoreException e) {

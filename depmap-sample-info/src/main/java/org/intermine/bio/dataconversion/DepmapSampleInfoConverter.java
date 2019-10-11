@@ -82,9 +82,6 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
         while (lineIter.hasNext()) {
             String[] line = (String[]) lineIter.next();
 
-            System.out.println("hello?");
-            System.out.println(line);
-
             String DepMapID = line[0];
             String CCLEname = line[2];
             String Lineage = line[5];
@@ -97,6 +94,10 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             String Age = "Not specified";
             if(!line[20].isEmpty()) {
                 Age = Double.toString(Math.floor(Double.valueOf(line[20])));
+            }
+
+            if(Lineage.isEmpty()) {
+                continue;
             }
 
             /*if(!line[20].isEmpty()) {
