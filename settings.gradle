@@ -7,3 +7,5 @@ include ':bio-source-depmap-cnv'
 project(':bio-source-depmap-cnv').projectDir = new File(settingsDir, './depmap-cnv')
 include ':bio-source-depmap-expression'
 project(':bio-source-depmap-expression').projectDir = new File(settingsDir, './depmap-expression')
+include ':bio-source-depmap-achilles-gene-effect'
+project(':bio-source-depmap-achilles-gene-effect').projectDir = new File(settingsDir, './depmap-achilles-gene-effect')
