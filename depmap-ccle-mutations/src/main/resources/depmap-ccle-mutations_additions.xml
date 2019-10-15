@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+    <classes>
+        <class name="DepMapMutations" is-interface="true">
+            <reference name="depMapID" referenced-type="CellLine" reverse-reference="depMapMutations"/>
+            <reference name="gene" referenced-type="Gene" reverse-reference="depMapMutations"/>
+            <attribute name="Chromosome" type="java.lang.String"/>
+            <attribute name="Start" type="java.lang.String"/>
+            <attribute name="End" type="java.lang.String"/>
+            <attribute name="Strand" type="java.lang.String"/>
+            <attribute name="VariantClassification" type="java.lang.String"/>
+            <attribute name="VariantType" type="java.lang.String"/>
+            <attribute name="GenomeChange" type="java.lang.String"/>
+            <attribute name="AnnotationTranscript" type="java.lang.String"/>
+            <attribute name="isDeleterious" type="java.lang.String"/>
+            <attribute name="isTCGAhotspot" type="java.lang.String"/>
+            <attribute name="TCGAhsCnt" type="java.lang.String"/>
+            <attribute name="isCOSMIChotspot" type="java.lang.String"/>
+            <attribute name="COSMIChsCnt" type="java.lang.String"/>
+            <attribute name="VariantAnnotation" type="java.lang.String"/>
+        </class>
+        <class name="Gene" is-interface="true" extends="BioEntity">
+            <collection name="depMapMutations" referenced-type="DepMapMutations" reverse-reference="gene"/>
+        </class>
+        <class name="CellLine" is-interface="true" extends="BioEntity">
+            <collection name="depMapMutations" referenced-type="DepMapMutations" reverse-reference="depMapID"/>
+        </class>
+    </classes>
+
+
+</classes>

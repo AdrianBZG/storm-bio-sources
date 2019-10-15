@@ -83,6 +83,11 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             String[] line = (String[]) lineIter.next();
 
             String DepMapID = line[0];
+
+            if(cellLines.containsKey(DepMapID)) {
+                continue;
+            }
+
             String CCLEname = line[2];
             String Lineage = line[5];
             String LineageSubtype = line[6];
@@ -111,7 +116,7 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             if(!DepMapID.isEmpty()) {
                 cellLineItem.setAttribute("DepMapID", DepMapID);
             } else {
-                cellLineItem.setAttribute("DepMapID", "Not specified");
+                continue;
             }
 
             if(!CCLEname.isEmpty()) {
@@ -123,7 +128,7 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             if(!Lineage.isEmpty()) {
                 cellLineItem.setAttribute("Lineage", Lineage);
             } else {
-                cellLineItem.setAttribute("Lineage", "Not specified");
+                continue;
             }
 
             if(!LineageSubtype.isEmpty()) {
@@ -153,7 +158,7 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             if(!Disease.isEmpty()) {
                 cellLineItem.setAttribute("Disease", Disease);
             } else {
-                cellLineItem.setAttribute("Disease", "Not specified");
+                continue;
             }
 
             if(!DiseaseSubtype.isEmpty()) {
