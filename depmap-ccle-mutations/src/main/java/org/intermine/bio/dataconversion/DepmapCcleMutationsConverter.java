@@ -36,10 +36,14 @@ public class DepmapCcleMutationsConverter extends BioDirectoryConverter
     private static final String DATASET_TITLE = "DepMap CCLE Mutations Data";
     private static final String DATA_SOURCE_NAME = "DepMap Public 19Q3";
 
+    private static final String TAXON_ID = "9606"; // Human Taxon ID
+
     private static final String MUTATIONS_CSV_FILE = "CCLE_mutations.csv";
 
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> cellLines = new HashMap<String, String>();
+
+    private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
 
     /**
      * Constructor
@@ -52,6 +56,8 @@ public class DepmapCcleMutationsConverter extends BioDirectoryConverter
 
     public void process(File dataDir) throws Exception {
         Map<String, File> files = readFilesInDir(dataDir);
+
+        organismIdentifier = getOrganism(TAXON_ID);
 
         processMutationsData(new FileReader(files.get(MUTATIONS_CSV_FILE)));
     }
@@ -220,6 +226,7 @@ public class DepmapCcleMutationsConverter extends BioDirectoryConverter
         if (refId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("symbol", identifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
             try {
                 store(gene);
             } catch (ObjectStoreException e) {

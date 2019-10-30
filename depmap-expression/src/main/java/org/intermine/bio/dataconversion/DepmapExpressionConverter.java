@@ -98,7 +98,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                 ExpressionItem = createItem("DepMapExpression");
 
                 if(!cellLine.isEmpty()) {
-                    ExpressionItem.setReference("DepMapID", getCellLine(cellLine));
+                    ExpressionItem.setReference("depMapID", getCellLine(cellLine));
                 } else {
                     continue;
                 }
@@ -126,6 +126,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         if (refId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("symbol", identifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
             try {
                 store(gene);
             } catch (ObjectStoreException e) {

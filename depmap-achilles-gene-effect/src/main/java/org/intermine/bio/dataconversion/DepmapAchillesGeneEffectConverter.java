@@ -128,6 +128,7 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
         if (refId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("symbol", identifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
             try {
                 store(gene);
             } catch (ObjectStoreException e) {
