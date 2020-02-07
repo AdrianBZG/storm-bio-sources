@@ -3,6 +3,7 @@
 
 <classes>
     <class name="CellLine" is-interface="true">
+        <attribute name="primaryIdentifier" type="java.lang.String"/>
         <attribute name="DepMapID" type="java.lang.String"/>
         <attribute name="CCLEname" type="java.lang.String"/>
         <attribute name="Lineage" type="java.lang.String"/>

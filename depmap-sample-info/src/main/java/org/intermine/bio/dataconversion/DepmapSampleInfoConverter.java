@@ -113,6 +113,8 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
 
             cellLineItem = createItem("CellLine");
 
+            cellLineItem.setAttribute("primaryIdentifier", DepMapID);
+
             if(!DepMapID.isEmpty()) {
                 cellLineItem.setAttribute("DepMapID", DepMapID);
             } else {

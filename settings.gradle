@@ -13,3 +13,5 @@ include ':bio-source-depmap-ccle-mutations'
 project(':bio-source-depmap-ccle-mutations').projectDir = new File(settingsDir, './depmap-ccle-mutations')
 include ':bio-source-tcga-sample-metadata'
 project(':bio-source-tcga-sample-metadata').projectDir = new File(settingsDir, './tcga-sample-metadata')
+include ':bio-source-tcga-somatic-mutation'
+project(':bio-source-tcga-somatic-mutation').projectDir = new File(settingsDir, './tcga-somatic-mutation')
