@@ -9,14 +9,14 @@
     <reference name="publication" referenced-type="Publication"/>
     <collection name="dataSets" referenced-type="DataSet"/>
 </class>
-<class name="Drug" is-interface="true">
+<class name="Drug" is-interface="true" extends="BioEntity">
     <attribute name="primaryIdentifier" type="java.lang.String"/>
     <attribute name="name" type="java.lang.String"/>
     <attribute name="source" type="java.lang.String"/>
     <collection name="drugInteractions" referenced-type="DrugInteraction" reverse-reference="drug"/>
     <collection name="dataSets" referenced-type="DataSet"/>
 </class>
-<class name="Gene" is-interface="true" extends="BioEntity">
+<class name="Gene" is-interface="true">
     <collection name="drugInteractions" referenced-type="DrugInteraction" reverse-reference="gene"/>
 </class>
 </classes>
