@@ -3,15 +3,15 @@
 
 <classes>
     <class name="TCGAMutation" is-interface="true">
-        <reference name="sampleID" referenced-type="TCGASample" reverse-reference="tCGAMutation"/>
-        <reference name="gene" referenced-type="Gene" reverse-reference="tCGAMutation"/>
+        <reference name="sampleID" referenced-type="TCGASample" reverse-reference="tcgaMutations"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="tcgaMutations"/>
         <attribute name="value" type="java.lang.String"/>
     </class>
     <class name="Gene" is-interface="true" extends="BioEntity">
-        <collection name="tCGAMutation" referenced-type="TCGAMutation" reverse-reference="gene"/>
+        <collection name="tcgaMutations" referenced-type="TCGAMutation" reverse-reference="gene"/>
     </class>
     <class name="TCGASample" is-interface="true" extends="BioEntity">
-        <collection name="tCGAMutation" referenced-type="TCGAMutation" reverse-reference="sampleID"/>
+        <collection name="tcgaMutations" referenced-type="TCGAMutation" reverse-reference="sampleID"/>
     </class>
 </classes>
 

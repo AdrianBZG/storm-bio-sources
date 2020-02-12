@@ -17,3 +17,5 @@ include ':bio-source-tcga-somatic-mutation'
 project(':bio-source-tcga-somatic-mutation').projectDir = new File(settingsDir, './tcga-somatic-mutation')
 include ':bio-source-disgenet-disease-associations'
 project(':bio-source-disgenet-disease-associations').projectDir = new File(settingsDir, './disgenet-disease-associations')
+include ':bio-source-opentargets-data'
+project(':bio-source-opentargets-data').projectDir = new File(settingsDir, './opentargets-data')
