@@ -105,6 +105,7 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
                 disease.setAttribute("diseaseName", diseaseName);
                 disease.setAttribute("diseaseType", diseaseType);
                 store(disease);
+                diseases.put(diseaseId, disease);
             }
 
             Item interactionItem;

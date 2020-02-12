@@ -2,6 +2,34 @@
 <!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
 
 <classes>
-<!-- add any <class> elements here -->
-
+    <class name="OpenTargetsAssociation" is-interface="true">
+        <reference name="gene" referenced-type="Gene" reverse-reference="openTargetsAssociations"/>
+        <reference name="disease" referenced-type="Disease" reverse-reference="openTargetsAssociations"/>
+        <attribute name="overallAssociationScore" type="java.lang.String"/>
+        <attribute name="literatureScore" type="java.lang.String"/>
+        <attribute name="rnaExpressionScore" type="java.lang.String"/>
+        <attribute name="geneticAssociationScore" type="java.lang.String"/>
+        <attribute name="somaticMutationScore" type="java.lang.String"/>
+        <attribute name="knownDrugScore" type="java.lang.String"/>
+        <attribute name="animalModelScore" type="java.lang.String"/>
+        <attribute name="affectedPathwayScore" type="java.lang.String"/>
+        <attribute name="literatureCount" type="java.lang.String"/>
+        <attribute name="rnaExpressionCount" type="java.lang.String"/>
+        <attribute name="geneticAssociationCount" type="java.lang.String"/>
+        <attribute name="somaticMutationCount" type="java.lang.String"/>
+        <attribute name="knownDrugCount" type="java.lang.String"/>
+        <attribute name="animalModelCount" type="java.lang.String"/>
+        <attribute name="affectedPathwayCount" type="java.lang.String"/>
+    </class>
+    <class name="DiseaseTherapeuticAreaRelation" is-interface="true">
+        <reference name="disease" referenced-type="Disease" reverse-reference="diseaseTherapeuticAreaRelations"/>
+        <attribute name="therapeuticArea" type="java.lang.String"/>
+    </class>
+    <class name="Disease" is-interface="true">
+        <collection name="openTargetsAssociations" referenced-type="OpenTargetsAssociation" reverse-reference="disease"/>
+        <collection name="diseaseTherapeuticAreaRelations" referenced-type="DiseaseTherapeuticAreaRelation" reverse-reference="disease"/>
+    </class>
+    <class name="Gene" is-interface="true">
+        <collection name="openTargetsAssociations" referenced-type="OpenTargetsAssociation" reverse-reference="gene"/>
+    </class>
 </classes>

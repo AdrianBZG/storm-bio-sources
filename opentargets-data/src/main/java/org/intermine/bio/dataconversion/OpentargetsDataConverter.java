@@ -44,6 +44,7 @@ public class OpentargetsDataConverter extends BioDirectoryConverter
 
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, Item> diseases = new HashMap<String, Item>();
+    private HashMap<String, List<String>> diseasesTherapeuticAreas = new HashMap<String, List<String>>();
 
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
@@ -101,6 +102,7 @@ public class OpentargetsDataConverter extends BioDirectoryConverter
                 disease.setAttribute("diseaseType", "NA");
                 disease.setAttribute("primaryIdentifier", diseaseId);
                 store(disease);
+                diseases.put(diseaseId, disease);
             }
         }
     }
@@ -157,10 +159,48 @@ public class OpentargetsDataConverter extends BioDirectoryConverter
                         List<Object> therapeuticAreasList = toList(therapeuticAreas);
                         for(Object element : therapeuticAreasList) {
                             String therapeuticAreaString = element.toString();
+                            if(!diseasesTherapeuticAreas.containsKey(diseaseId)) {
+                                diseasesTherapeuticAreas.put(diseaseId, new ArrayList<String>());
+                            }
                             // Check that the diseaseId in the hashmap doesn't have this therapeutic area in its value (list of areas)
+                            List<String> therapeuticAreasCurrentDisease = diseasesTherapeuticAreas.get(diseaseId);
+                            if(!therapeuticAreasCurrentDisease.contains(element)) {
+                                // Create the disease-therapeutic area relation
+                                diseasesTherapeuticAreas.get(diseaseId).add(therapeuticAreaString);
 
-                            // Else create the disease-therapeutic area relation
+                                // Create the item here
+                                Item diseaseTherapeuticAreaRelation;
+                                diseaseTherapeuticAreaRelation = createItem("DiseaseTherapeuticAreaRelation");
+                                diseaseTherapeuticAreaRelation.setReference("disease", getDisease(diseaseId));
+                                diseaseTherapeuticAreaRelation.setAttribute("therapeuticArea", therapeuticAreaString);
+                                store(diseaseTherapeuticAreaRelation);
+                            }
                         }
+
+                        // Save OT association
+                        Item openTargetsAssociation;
+                        openTargetsAssociation = createItem("OpenTargetsAssociation");
+                        openTargetsAssociation.setReference("gene", getGene(geneSymbol));
+                        openTargetsAssociation.setReference("disease", getDisease(diseaseId));
+                        openTargetsAssociation.setAttribute("overallAssociationScore", overallAssociationScore);
+                        openTargetsAssociation.setAttribute("literatureScore", literatureScore);
+                        openTargetsAssociation.setAttribute("rnaExpressionScore", rnaExpressionScore);
+                        openTargetsAssociation.setAttribute("geneticAssociationScore", geneticAssociationScore);
+                        openTargetsAssociation.setAttribute("somaticMutationScore", somaticMutationScore);
+                        openTargetsAssociation.setAttribute("knownDrugScore", knownDrugScore);
+                        openTargetsAssociation.setAttribute("animalModelScore", animalModelScore);
+                        openTargetsAssociation.setAttribute("affectedPathwayScore", affectedPathwayScore);
+
+                        openTargetsAssociation.setAttribute("literatureCount", literatureCount);
+                        openTargetsAssociation.setAttribute("rnaExpressionCount", rnaExpressionCount);
+                        openTargetsAssociation.setAttribute("geneticAssociationCount", geneticAssociationCount);
+                        openTargetsAssociation.setAttribute("somaticMutationCount", somaticMutationCount);
+                        openTargetsAssociation.setAttribute("knownDrugCount", knownDrugCount);
+                        openTargetsAssociation.setAttribute("animalModelCount", animalModelCount);
+                        openTargetsAssociation.setAttribute("affectedPathwayCount", affectedPathwayCount);
+
+                        store(openTargetsAssociation);
+
 
                     } catch (JSONException err) {
                         throw new RuntimeException("Failed to read the following JSON in OpenTargets associations: " + line, err);
