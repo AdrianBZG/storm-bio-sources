@@ -124,8 +124,8 @@ public class DgidbDataConverter extends BioDirectoryConverter
                 continue;
             }
 
-            String geneEntrezId = line[2];
-            if(geneEntrezId.isEmpty()) {
+            String geneSymbol = line[0];
+            if(geneSymbol.isEmpty()) {
                 continue;
             }
             String chemblId = line[8];
@@ -139,7 +139,7 @@ public class DgidbDataConverter extends BioDirectoryConverter
 
             Item interactionItem;
             interactionItem = createItem("DrugInteraction");
-            interactionItem.setReference("gene", getGene(geneEntrezId));
+            interactionItem.setReference("gene", getGene(geneSymbol));
             interactionItem.setReference("drug", getDrug(chemblId));
             if(!interactionType.isEmpty()) {
                 interactionItem.setAttribute("type", interactionType);
@@ -189,7 +189,8 @@ public class DgidbDataConverter extends BioDirectoryConverter
         String refId = genes.get(identifier);
         if (refId == null) {
             Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", identifier);
+            gene.setAttribute("symbol", identifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
             try {
                 store(gene);
             } catch (ObjectStoreException e) {

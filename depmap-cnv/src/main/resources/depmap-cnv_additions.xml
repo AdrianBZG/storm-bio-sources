@@ -5,7 +5,7 @@
     <class name="DepMapCopyNumber" is-interface="true">
         <reference name="depMapID" referenced-type="CellLine" reverse-reference="depMapCopyNumber"/>
         <reference name="gene" referenced-type="Gene" reverse-reference="depMapCopyNumber"/>
-        <attribute name="value" type="java.lang.String"/>
+        <attribute name="value" type="java.lang.Double"/>
     </class>
     <class name="Gene" is-interface="true" extends="BioEntity">
         <collection name="depMapCopyNumber" referenced-type="DepMapCopyNumber" reverse-reference="gene"/>

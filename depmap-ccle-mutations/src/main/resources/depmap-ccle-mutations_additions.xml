@@ -7,8 +7,8 @@
             <reference name="depMapID" referenced-type="CellLine" reverse-reference="depMapMutations"/>
             <reference name="gene" referenced-type="Gene" reverse-reference="depMapMutations"/>
             <attribute name="Chromosome" type="java.lang.String"/>
-            <attribute name="Start" type="java.lang.String"/>
-            <attribute name="End" type="java.lang.String"/>
+            <attribute name="Start" type="java.lang.Integer"/>
+            <attribute name="End" type="java.lang.Integer"/>
             <attribute name="Strand" type="java.lang.String"/>
             <attribute name="VariantClassification" type="java.lang.String"/>
             <attribute name="VariantType" type="java.lang.String"/>
