@@ -93,11 +93,11 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
 
             String cellLine = line[0];
             for(int i = 1; i < line.length; i++) {
-                String cnvValue = line[i];
+                String effectValue = line[i];
                 String theGeneForThisItem = genes.get(i-1);
                 Item CopyNumberItem;
 
-                CopyNumberItem = createItem("DepMapCopyNumber");
+                CopyNumberItem = createItem("DepMapAchillesGeneEffect");
 
                 if(!cellLine.isEmpty()) {
                     CopyNumberItem.setReference("depMapID", getCellLine(cellLine));
@@ -111,8 +111,8 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!cnvValue.isEmpty()) {
-                    CopyNumberItem.setAttribute("value", cnvValue);
+                if(!effectValue.isEmpty() || effectValue.trim().equals("NA")) {
+                    CopyNumberItem.setAttribute("value", effectValue);
                 } else {
                     continue;
                 }

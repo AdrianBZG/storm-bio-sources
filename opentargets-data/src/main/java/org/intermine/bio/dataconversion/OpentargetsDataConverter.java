@@ -93,14 +93,14 @@ public class OpentargetsDataConverter extends BioDirectoryConverter
             String diseaseId = line[0];
             String diseaseName = line[1];
 
-            Item disease = getDisease(diseaseId);
+            Item disease = null;
 
-            if (disease == null) {
+            if (diseases.get(diseaseId) == null) {
                 disease = createItem("Disease");
+                disease.setAttribute("primaryIdentifier", diseaseId);
                 disease.setAttribute("diseaseId", diseaseId);
                 disease.setAttribute("diseaseName", diseaseName);
                 disease.setAttribute("diseaseType", "NA");
-                disease.setAttribute("primaryIdentifier", diseaseId);
                 store(disease);
                 diseases.put(diseaseId, disease);
             }

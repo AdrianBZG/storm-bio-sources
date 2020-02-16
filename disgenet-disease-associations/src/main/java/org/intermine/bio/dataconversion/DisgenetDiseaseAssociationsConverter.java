@@ -55,10 +55,10 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
         super(writer, model, DATA_SOURCE_NAME, DATASET_TITLE);
     }
 
-    @Override
+    /*@Override
     public void close() throws Exception {
         store(diseases.values());
-    }
+    }*/
 
     /**
      * 
@@ -97,15 +97,24 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
             String diseaseType = line[6];
             String score = line[9];
 
-            Item disease = getDisease(diseaseId);
+            //Item disease = getDisease(diseaseId);
+            Item disease = null;
 
-            if (disease == null) {
-                disease = createItem("Disease");
-                disease.setAttribute("diseaseId", diseaseId);
-                disease.setAttribute("diseaseName", diseaseName);
-                disease.setAttribute("diseaseType", diseaseType);
-                store(disease);
-                diseases.put(diseaseId, disease);
+            if (diseases.get(diseaseId) == null) {
+                    disease = createItem("Disease");
+                    disease.setAttribute("primaryIdentifier", diseaseId);
+                    disease.setAttribute("diseaseId", diseaseId);
+                    disease.setAttribute("diseaseName", diseaseName);
+                    disease.setAttribute("diseaseType", diseaseType);
+                    try {
+                        store(disease);
+                    } catch (ObjectStoreException e) {
+                        throw new RuntimeException("failed to store disease with primary identifier: " + diseaseId, e);
+                    }
+                    diseases.put(diseaseId, disease);
+
+            } else {
+                disease = getDisease(diseaseId);
             }
 
             Item interactionItem;
@@ -113,7 +122,11 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
             interactionItem.setReference("gene", getGene(geneSymbol));
             interactionItem.setReference("disease", disease);
             interactionItem.setAttribute("associationScore", score);
-            store(interactionItem);
+            try {
+                store(interactionItem);
+            } catch (ObjectStoreException e) {
+                throw new RuntimeException("failed to store diseaseassociation with disease identifier: " + diseaseId, e);
+            }
         }
     }
 

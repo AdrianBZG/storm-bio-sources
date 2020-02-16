@@ -107,7 +107,7 @@ public class DepmapCnvConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!cnvValue.isEmpty()) {
+                if(!cnvValue.isEmpty() || cnvValue.trim().equals("NA")) {
                     CopyNumberItem.setAttribute("value", cnvValue);
                 } else {
                     continue;

@@ -8,7 +8,6 @@
         <reference name="disease" referenced-type="Disease" reverse-reference="diseaseAssociations"/>
     </class>
     <class name="Disease" is-interface="true" extends="BioEntity">
-        <attribute name="primaryIdentifier" type="java.lang.String"/>
         <attribute name="diseaseId" type="java.lang.String"/>
         <attribute name="diseaseName" type="java.lang.String"/>
         <attribute name="diseaseType" type="java.lang.String"/>
