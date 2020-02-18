@@ -9,7 +9,6 @@
     </class>
     <class name="Disease" is-interface="true" extends="BioEntity">
         <attribute name="diseaseId" type="java.lang.String"/>
-        <attribute name="diseaseName" type="java.lang.String"/>
         <attribute name="diseaseType" type="java.lang.String"/>
         <collection name="diseaseAssociations" referenced-type="DiseaseAssociation" reverse-reference="disease"/>
     </class>

@@ -110,7 +110,7 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
                     disease = createItem("Disease");
                     disease.setAttribute("primaryIdentifier", diseaseId);
                     disease.setAttribute("diseaseId", diseaseId);
-                    disease.setAttribute("diseaseName", diseaseName);
+                    disease.setAttribute("name", diseaseName);
                     disease.setAttribute("diseaseType", diseaseType);
                     try {
                         store(disease);
