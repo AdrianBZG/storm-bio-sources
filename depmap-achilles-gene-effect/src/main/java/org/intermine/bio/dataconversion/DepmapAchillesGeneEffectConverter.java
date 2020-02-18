@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.intermine.dataconversion.ItemWriter;
 import org.intermine.metadata.Model;
 import org.intermine.objectstore.ObjectStoreException;
@@ -40,6 +42,9 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
 
     private static final String CN_CSV_FILE = "Achilles_gene_effect.csv";
 
+    protected IdResolver rslv;
+    private static final Logger LOG = Logger.getLogger(DepmapAchillesGeneEffectConverter.class);
+
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> cellLines = new HashMap<String, String>();
 
@@ -52,6 +57,9 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
      */
     public DepmapAchillesGeneEffectConverter(ItemWriter writer, Model model) {
         super(writer, model, DATA_SOURCE_NAME, DATASET_TITLE);
+        if (rslv == null) {
+            rslv = IdResolverService.getIdResolverByOrganism(TAXON_ID);
+        }
     }
 
     /**
@@ -97,7 +105,7 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
                 String theGeneForThisItem = genes.get(i-1);
                 Item CopyNumberItem;
 
-                CopyNumberItem = createItem("DepMapAchillesGeneEffect");
+                CopyNumberItem = createItem("AchillesGeneEffect");
 
                 if(!cellLine.isEmpty()) {
                     CopyNumberItem.setReference("depMapID", getCellLine(cellLine));
@@ -106,12 +114,18 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
                 }
 
                 if(!theGeneForThisItem.isEmpty()) {
-                    CopyNumberItem.setReference("gene", getGene(theGeneForThisItem));
+                    String geneId = getGeneId(theGeneForThisItem);
+
+                    if (StringUtils.isEmpty(geneId)) {
+                        continue;
+                    }
+
+                    CopyNumberItem.setReference("gene", geneId);
                 } else {
                     continue;
                 }
 
-                if(!effectValue.isEmpty() || effectValue.trim().equals("NA")) {
+                if(!effectValue.isEmpty() && StringUtils.isNumeric(effectValue)) {
                     CopyNumberItem.setAttribute("value", effectValue);
                 } else {
                     continue;
@@ -123,21 +137,37 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
         }
     }
 
-    public String getGene(String identifier) {
-        String refId = genes.get(identifier);
-        if (refId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("symbol", identifier);
-            gene.setReference("organism", getOrganism(TAXON_ID));
-            try {
-                store(gene);
-            } catch (ObjectStoreException e) {
-                throw new RuntimeException("failed to store gene with primary identifier: " + identifier, e);
-            }
-            refId = gene.getIdentifier();
-            genes.put(identifier, refId);
+    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(primaryIdentifier);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
         }
-        return refId;
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+
+    private String resolveGene(String identifier) {
+        String id = identifier;
+
+        if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
+            int resCount = rslv.countResolutions(TAXON_ID, identifier);
+            if (resCount != 1) {
+                LOG.info("RESOLVER: failed to resolve gene to one identifier, ignoring gene: "
+                        + identifier + " count: " + resCount + " Human identifier: "
+                        + rslv.resolveId(TAXON_ID, identifier));
+                return null;
+            }
+            id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
+        }
+        return id;
     }
 
     public String getCellLine(String identifier) {

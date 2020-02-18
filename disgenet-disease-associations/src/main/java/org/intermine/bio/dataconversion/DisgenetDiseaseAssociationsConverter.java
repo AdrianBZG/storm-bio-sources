@@ -17,7 +17,9 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
+import org.apache.commons.lang.StringUtils;
 import org.intermine.dataconversion.ItemWriter;
 import org.intermine.metadata.Model;
 import org.intermine.objectstore.ObjectStoreException;
@@ -39,10 +41,11 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
 
     private static final String DISGENET_FILE = "curated_gene_disease_associations.tsv";
 
-
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, Item> diseases = new HashMap<String, Item>();
 
+    protected IdResolver rslv;
+    private static final Logger LOG = Logger.getLogger(DisgenetDiseaseAssociationsConverter.class);
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
 
@@ -53,6 +56,9 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
      */
     public DisgenetDiseaseAssociationsConverter(ItemWriter writer, Model model) {
         super(writer, model, DATA_SOURCE_NAME, DATASET_TITLE);
+        if (rslv == null) {
+            rslv = IdResolverService.getIdResolverByOrganism(TAXON_ID);
+        }
     }
 
     /*@Override
@@ -91,7 +97,7 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
         while (lineIter.hasNext()) {
             String[] line = (String[]) lineIter.next();
 
-            String geneSymbol = line[0];
+            String geneSymbol = line[1];
             String diseaseId = line[4];
             String diseaseName = line[5];
             String diseaseType = line[6];
@@ -117,9 +123,15 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
                 disease = getDisease(diseaseId);
             }
 
+            String geneId = getGeneId(geneSymbol);
+
+            if (StringUtils.isEmpty(geneId)) {
+                continue;
+            }
+
             Item interactionItem;
             interactionItem = createItem("DiseaseAssociation");
-            interactionItem.setReference("gene", getGene(geneSymbol));
+            interactionItem.setReference("gene", geneId);
             interactionItem.setReference("disease", disease);
             interactionItem.setAttribute("associationScore", score);
             try {
@@ -130,21 +142,37 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
         }
     }
 
-    public String getGene(String identifier) {
-        String refId = genes.get(identifier);
-        if (refId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("symbol", identifier);
-            gene.setReference("organism", getOrganism(TAXON_ID));
-            try {
-                store(gene);
-            } catch (ObjectStoreException e) {
-                throw new RuntimeException("failed to store gene with primary identifier: " + identifier, e);
-            }
-            refId = gene.getIdentifier();
-            genes.put(identifier, refId);
+    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(primaryIdentifier);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
         }
-        return refId;
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+
+    private String resolveGene(String identifier) {
+        String id = identifier;
+
+        if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
+            int resCount = rslv.countResolutions(TAXON_ID, identifier);
+            if (resCount != 1) {
+                LOG.info("RESOLVER: failed to resolve gene to one identifier, ignoring gene: "
+                        + identifier + " count: " + resCount + " Human identifier: "
+                        + rslv.resolveId(TAXON_ID, identifier));
+                return null;
+            }
+            id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
+        }
+        return id;
     }
 
     private Item getDisease(String diseaseId) {

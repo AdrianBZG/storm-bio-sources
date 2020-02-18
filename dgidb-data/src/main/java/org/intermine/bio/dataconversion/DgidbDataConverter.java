@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.intermine.dataconversion.ItemWriter;
 import org.intermine.metadata.Model;
 import org.intermine.objectstore.ObjectStoreException;
@@ -40,8 +42,13 @@ public class DgidbDataConverter extends BioDirectoryConverter
     private static final String DRUGS_TSV_FILE = "drugs.tsv";
     private static final String INTERACTIONS_TSV_FILE = "interactions.tsv";
 
+    protected IdResolver rslv;
+
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> drugs = new HashMap<String, String>();
+
+    private static final Logger LOG = Logger.getLogger(DgidbDataConverter.class);
+
     private Map<String, String> publications = new HashMap<String, String>();
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
@@ -53,6 +60,9 @@ public class DgidbDataConverter extends BioDirectoryConverter
      */
     public DgidbDataConverter(ItemWriter writer, Model model) {
         super(writer, model, DATA_SOURCE_NAME, DATASET_TITLE);
+        if (rslv == null) {
+            rslv = IdResolverService.getIdResolverByOrganism(TAXON_ID);
+        }
     }
 
     /**
@@ -137,9 +147,15 @@ public class DgidbDataConverter extends BioDirectoryConverter
                 continue;
             }
 
+            String geneId = getGeneId(geneSymbol);
+
+            if (StringUtils.isEmpty(geneId)) {
+                continue;
+            }
+
             Item interactionItem;
             interactionItem = createItem("DrugInteraction");
-            interactionItem.setReference("gene", getGene(geneSymbol));
+            interactionItem.setReference("gene", geneId);
             interactionItem.setReference("drug", getDrug(chemblId));
             if(!interactionType.isEmpty()) {
                 interactionItem.setAttribute("type", interactionType);
@@ -185,20 +201,36 @@ public class DgidbDataConverter extends BioDirectoryConverter
         return refId;
     }
 
-    public String getGene(String identifier) {
-        String refId = genes.get(identifier);
-        if (refId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("symbol", identifier);
-            gene.setReference("organism", getOrganism(TAXON_ID));
-            try {
-                store(gene);
-            } catch (ObjectStoreException e) {
-                throw new RuntimeException("failed to store gene with primary identifier: " + identifier, e);
-            }
-            refId = gene.getIdentifier();
-            genes.put(identifier, refId);
+    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(primaryIdentifier);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
         }
-        return refId;
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+
+    private String resolveGene(String identifier) {
+        String id = identifier;
+
+        if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
+            int resCount = rslv.countResolutions(TAXON_ID, identifier);
+            if (resCount != 1) {
+                LOG.info("RESOLVER: failed to resolve gene to one identifier, ignoring gene: "
+                        + identifier + " count: " + resCount + " Human identifier: "
+                        + rslv.resolveId(TAXON_ID, identifier));
+                return null;
+            }
+            id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
+        }
+        return id;
     }
 }
