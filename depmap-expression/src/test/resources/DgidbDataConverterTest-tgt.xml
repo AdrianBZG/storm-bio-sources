@@ -1,0 +1,198 @@
+<items>
+    <item id="6_1" class="Gene">
+        <attribute name="primaryIdentifier" value="1022"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="8_1" class="Publication">
+        <attribute name="pubMedId" value="3185288"/>
+    </item>
+    <item id="5_1" class="DrugInteraction">
+        <attribute name="type" value="inhibitor"/>
+        <reference name="drug" ref_id="4_9"/>
+        <reference name="gene" ref_id="6_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_6" class="Drug">
+        <attribute name="name" value="IRINOTECAN"/>
+        <attribute name="primaryIdentifier" value="CHEMBL481"/>
+        <attribute name="source" value="CKB"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_4" class="Drug">
+        <attribute name="name" value="PENTOSTATIN"/>
+        <attribute name="primaryIdentifier" value="CHEMBL1580"/>
+        <attribute name="source" value="NCI"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="6_5" class="Gene">
+        <attribute name="primaryIdentifier" value="5159"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_16" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL658"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="3_1" class="Organism">
+        <attribute name="taxonId" value="9606"/>
+    </item>
+    <item id="4_5" class="Drug">
+        <attribute name="name" value="GALANTIDE"/>
+        <attribute name="primaryIdentifier" value="CHEMBL526003"/>
+        <attribute name="source" value="GuideToPharmacologyInteractions"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_3" class="Drug">
+        <attribute name="name" value="OLEIC ACID"/>
+        <attribute name="primaryIdentifier" value="CHEMBL8659"/>
+        <attribute name="source" value="TTD"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_10" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL72862"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_11" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL635"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="5_7" class="DrugInteraction">
+        <reference name="drug" ref_id="4_15"/>
+        <reference name="gene" ref_id="6_7"/>
+        <reference name="publication" ref_id="8_3"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_1" class="Drug">
+        <attribute name="name" value="LINCOMYCIN"/>
+        <attribute name="primaryIdentifier" value="CHEMBL1447"/>
+        <attribute name="source" value="PubChem"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="6_3" class="Gene">
+        <attribute name="primaryIdentifier" value="348"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_2" class="Drug">
+        <attribute name="name" value="CHEMBL2113342"/>
+        <attribute name="primaryIdentifier" value="CHEMBL2113342"/>
+        <attribute name="source" value="PubChem"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="0_1" class="Ontology">
+        <attribute name="name" value="Sequence Ontology"/>
+        <attribute name="url" value="http://www.sequenceontology.org"/>
+    </item>
+    <item id="6_2" class="Gene">
+        <attribute name="primaryIdentifier" value="135"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_14" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL561708"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_7" class="Drug">
+        <attribute name="name" value="CERITINIB"/>
+        <attribute name="primaryIdentifier" value="CHEMBL2403108"/>
+        <attribute name="source" value="ChemblInteractions"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="8_3" class="Publication">
+        <attribute name="pubMedId" value="291471"/>
+    </item>
+    <item id="6_4" class="Gene">
+        <attribute name="primaryIdentifier" value="1571"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="6_7" class="Gene">
+        <attribute name="primaryIdentifier" value="1791"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="8_2" class="Publication">
+        <attribute name="pubMedId" value="15056880"/>
+    </item>
+    <item id="4_13" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL576982"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="1_1" class="DataSource">
+        <attribute name="name" value="DGIdb"/>
+    </item>
+    <item id="5_2" class="DrugInteraction">
+        <attribute name="type" value="antagonist"/>
+        <reference name="drug" ref_id="4_10"/>
+        <reference name="gene" ref_id="6_2"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_12" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL366460"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_8" class="Drug">
+        <attribute name="name" value="PERILLYL ALCOHOL"/>
+        <attribute name="primaryIdentifier" value="CHEMBL236687"/>
+        <attribute name="source" value="NCI"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="5_3" class="DrugInteraction">
+        <reference name="drug" ref_id="4_11"/>
+        <reference name="gene" ref_id="6_3"/>
+        <reference name="publication" ref_id="8_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_9" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL296468"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="6_8" class="Gene">
+        <attribute name="primaryIdentifier" value="4988"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="4_15" class="Drug">
+        <attribute name="primaryIdentifier" value="CHEMBL467"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="5_6" class="DrugInteraction">
+        <attribute name="type" value="inhibitor"/>
+        <reference name="drug" ref_id="4_14"/>
+        <reference name="gene" ref_id="6_6"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="6_6" class="Gene">
+        <attribute name="primaryIdentifier" value="2475"/>
+        <reference name="sequenceOntologyTerm" ref_id="7_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="7_1" class="SOTerm">
+        <attribute name="name" value="gene"/>
+        <reference name="ontology" ref_id="0_1"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="2_1" class="DataSet">
+        <attribute name="name" value="DGIdb Dataset"/>
+        <reference name="dataSource" ref_id="1_1"/>
+    </item>
+    <item id="5_4" class="DrugInteraction">
+        <reference name="drug" ref_id="4_12"/>
+        <reference name="gene" ref_id="6_4"/>
+        <reference name="publication" ref_id="8_2"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="5_5" class="DrugInteraction">
+        <attribute name="type" value="inhibitor"/>
+        <reference name="drug" ref_id="4_13"/>
+        <reference name="gene" ref_id="6_5"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+    <item id="5_8" class="DrugInteraction">
+        <attribute name="type" value="agonist"/>
+        <reference name="drug" ref_id="4_16"/>
+        <reference name="gene" ref_id="6_8"/>
+        <collection name="dataSets"><reference ref_id="2_1"/></collection>
+    </item>
+</items>
