@@ -124,7 +124,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                 }
 
                 if(!expressionValue.isEmpty()) {
-                    ExpressionItem.setAttribute("value", expressionValue);
+                    ExpressionItem.setAttribute("DepmapExpressionValue", expressionValue);
                 } else {
                     continue;
                 }

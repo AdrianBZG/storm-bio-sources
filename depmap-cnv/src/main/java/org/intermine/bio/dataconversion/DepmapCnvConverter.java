@@ -122,7 +122,7 @@ public class DepmapCnvConverter extends BioDirectoryConverter
                 }
 
                 if(!cnvValue.isEmpty() && StringUtils.isNumeric(cnvValue)) {
-                    CopyNumberItem.setAttribute("value", cnvValue);
+                    CopyNumberItem.setAttribute("DepmapCnvValue", cnvValue);
                 } else {
                     continue;
                 }

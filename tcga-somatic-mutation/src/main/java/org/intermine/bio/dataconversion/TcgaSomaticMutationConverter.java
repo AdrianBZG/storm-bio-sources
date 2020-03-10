@@ -123,7 +123,7 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
                 }
 
                 if(!mutationValue.isEmpty() && StringUtils.isNumeric(mutationValue)) {
-                    ExpressionItem.setAttribute("value", mutationValue);
+                    ExpressionItem.setAttribute("TcgaSomaticMutationValue", mutationValue);
                 } else {
                     continue;
                 }
