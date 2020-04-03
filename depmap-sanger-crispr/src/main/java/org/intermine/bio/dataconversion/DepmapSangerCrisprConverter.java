@@ -104,12 +104,12 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
             for(int i = 1; i < line.length; i++) {
                 String effectValue = line[i];
                 String theGeneForThisItem = genes.get(i-1);
-                Item CopyNumberItem;
+                Item SangerCrisprItem;
 
-                CopyNumberItem = createItem("SangerCrisprGeneEffect");
+                SangerCrisprItem = createItem("SangerCrisprGeneEffect");
 
                 if(!cellLine.isEmpty()) {
-                    CopyNumberItem.setReference("depMapID", getCellLine(cellLine));
+                    SangerCrisprItem.setReference("depMapID", getCellLine(cellLine));
                 } else {
                     continue;
                 }
@@ -121,18 +121,18 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
                         continue;
                     }
 
-                    CopyNumberItem.setReference("gene", geneId);
+                    SangerCrisprItem.setReference("gene", geneId);
                 } else {
                     continue;
                 }
 
                 if(!effectValue.isEmpty() && StringUtils.isNumeric(effectValue)) {
-                    CopyNumberItem.setAttribute("DepmapSangerCrisprGeneEffectValue", effectValue);
+                    SangerCrisprItem.setAttribute("DepmapSangerCrisprGeneEffectValue", effectValue);
                 } else {
                     continue;
                 }
 
-                store(CopyNumberItem);
+                store(SangerCrisprItem);
                 //cellLines.put(cellLine, CopyNumberItem.getIdentifier());
             }
         }
