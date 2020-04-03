@@ -19,3 +19,7 @@ include ':bio-source-disgenet-disease-associations'
 project(':bio-source-disgenet-disease-associations').projectDir = new File(settingsDir, './disgenet-disease-associations')
 include ':bio-source-opentargets-data'
 project(':bio-source-opentargets-data').projectDir = new File(settingsDir, './opentargets-data')
+include ':bio-source-depmap-demeter2-dependency'
+project(':bio-source-depmap-demeter2-dependency').projectDir = new File(settingsDir, './depmap-demeter2-dependency')
+include ':bio-source-depmap-sanger-crispr'
+project(':bio-source-depmap-sanger-crispr').projectDir = new File(settingsDir, './depmap-sanger-crispr')

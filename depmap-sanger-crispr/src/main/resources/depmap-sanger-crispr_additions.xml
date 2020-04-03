@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+    <class name="SangerCrisprGeneEffect" is-interface="true">
+        <reference name="depMapID" referenced-type="CellLine" reverse-reference="sangerCrisprGeneEffect"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="sangerCrisprGeneEffect"/>
+        <attribute name="DepmapSangerCrisprGeneEffectValue" type="java.lang.Double"/>
+    </class>
+    <class name="Gene" is-interface="true" extends="BioEntity">
+        <collection name="sangerCrisprGeneEffect" referenced-type="SangerCrisprGeneEffect" reverse-reference="gene"/>
+    </class>
+    <class name="CellLine" is-interface="true" extends="BioEntity">
+        <collection name="sangerCrisprGeneEffect" referenced-type="SangerCrisprGeneEffect" reverse-reference="depMapID"/>
+    </class>
+</classes>

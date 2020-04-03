@@ -32,30 +32,31 @@ import org.intermine.xml.full.Item;
  * 
  * @author
  */
-public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
+public class DepmapSangerCrisprConverter extends BioDirectoryConverter
 {
     //
-    private static final String DATASET_TITLE = "DepMap Achilles Gene Effect";
-    private static final String DATA_SOURCE_NAME = "DepMap Public 20Q1";
+    private static final String DATASET_TITLE = "DepMap Sanger CRISPR";
+    private static final String DATA_SOURCE_NAME = "DepMap Sanger CRISPR";
 
     private static final String TAXON_ID = "9606"; // Human Taxon ID
 
-    private static final String CN_CSV_FILE = "Achilles_gene_effect.csv";
+    private static final String CN_CSV_FILE = "gene_effect.csv";
 
     protected IdResolver rslv;
-    private static final Logger LOG = Logger.getLogger(DepmapAchillesGeneEffectConverter.class);
+    private static final Logger LOG = Logger.getLogger(DepmapSangerCrisprConverter.class);
 
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> cellLines = new HashMap<String, String>();
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
 
+
     /**
      * Constructor
      * @param writer the ItemWriter used to handle the resultant items
      * @param model the Model
      */
-    public DepmapAchillesGeneEffectConverter(ItemWriter writer, Model model) {
+    public DepmapSangerCrisprConverter(ItemWriter writer, Model model) {
         super(writer, model, DATA_SOURCE_NAME, DATASET_TITLE);
         if (rslv == null) {
             rslv = IdResolverService.getIdResolverByOrganism(TAXON_ID);
@@ -105,7 +106,7 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
                 String theGeneForThisItem = genes.get(i-1);
                 Item CopyNumberItem;
 
-                CopyNumberItem = createItem("AchillesGeneEffect");
+                CopyNumberItem = createItem("SangerCrisprGeneEffect");
 
                 if(!cellLine.isEmpty()) {
                     CopyNumberItem.setReference("depMapID", getCellLine(cellLine));
@@ -126,7 +127,7 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
                 }
 
                 if(!effectValue.isEmpty() && StringUtils.isNumeric(effectValue)) {
-                    CopyNumberItem.setAttribute("DepmapAchillesGeneEffectValue", effectValue);
+                    CopyNumberItem.setAttribute("DepmapSangerCrisprGeneEffectValue", effectValue);
                 } else {
                     continue;
                 }
