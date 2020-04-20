@@ -106,15 +106,25 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
                 String theGeneForThisItem = genes.get(i-1);
                 Item SangerCrisprItem;
 
-                SangerCrisprItem = createItem("SangerCrisprGeneEffect");
+                SangerCrisprItem = createItem("DepMapSangerCrisprGeneEffect");
 
-                if(!cellLine.isEmpty()) {
+                SangerCrisprItem.setReference("depMapID", getCellLine(cellLine));
+
+                /*if(!cellLine.isEmpty()) {
                     SangerCrisprItem.setReference("depMapID", getCellLine(cellLine));
                 } else {
                     continue;
+                }*/
+
+                String geneId = getGeneId(theGeneForThisItem);
+
+                if (StringUtils.isEmpty(geneId)) {
+                    continue;
                 }
 
-                if(!theGeneForThisItem.isEmpty()) {
+                SangerCrisprItem.setReference("gene", geneId);
+
+                /*if(!theGeneForThisItem.isEmpty()) {
                     String geneId = getGeneId(theGeneForThisItem);
 
                     if (StringUtils.isEmpty(geneId)) {
@@ -124,15 +134,17 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
                     SangerCrisprItem.setReference("gene", geneId);
                 } else {
                     continue;
-                }
+                }*/
 
-                if(!effectValue.isEmpty() && StringUtils.isNumeric(effectValue)) {
+                if(!effectValue.isEmpty()) {
+                    LOG.info("SANGER CRISPR 1");
                     SangerCrisprItem.setAttribute("DepmapSangerCrisprGeneEffectValue", effectValue);
+                    store(SangerCrisprItem);
                 } else {
                     continue;
                 }
 
-                store(SangerCrisprItem);
+                //store(SangerCrisprItem);
                 //cellLines.put(cellLine, CopyNumberItem.getIdentifier());
             }
         }

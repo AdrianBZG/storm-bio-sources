@@ -2,15 +2,15 @@
 <!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
 
 <classes>
-    <class name="DEMETER2Dependency" is-interface="true">
-        <reference name="CCLEName" referenced-type="CellLine" reverse-reference="dEMETER2Dependency"/>
-        <reference name="gene" referenced-type="Gene" reverse-reference="dEMETER2Dependency"/>
+    <class name="DepMapDEMETER2Dependency" is-interface="true">
+        <reference name="cCLEname" referenced-type="CellLine" reverse-reference="depMapDEMETER2Dependency"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="depMapDEMETER2Dependency"/>
         <attribute name="DepMapDEMETER2DependencyValue" type="java.lang.Double"/>
     </class>
     <class name="Gene" is-interface="true" extends="BioEntity">
-        <collection name="dEMETER2Dependency" referenced-type="DEMETER2Dependency" reverse-reference="gene"/>
+        <collection name="depMapDEMETER2Dependency" referenced-type="DepMapDEMETER2Dependency" reverse-reference="gene"/>
     </class>
     <class name="CellLine" is-interface="true" extends="BioEntity">
-        <collection name="dEMETER2Dependency" referenced-type="DEMETER2Dependency" reverse-reference="CCLEName"/>
+        <collection name="depMapDEMETER2Dependency" referenced-type="DepMapDEMETER2Dependency" reverse-reference="cCLEname"/>
     </class>
 </classes>

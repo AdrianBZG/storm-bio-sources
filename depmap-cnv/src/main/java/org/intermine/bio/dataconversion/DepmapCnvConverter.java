@@ -92,25 +92,42 @@ public class DepmapCnvConverter extends BioDirectoryConverter
         }
 
         //lineIter.next();
+        LOG.info("DEPMAPCNV 1: processing "
+                + genes.size() + " genes: " + genes.get(0));
         while (lineIter.hasNext()) {
             String[] line = (String[]) lineIter.next();
 
             String cellLine = line[0];
+            LOG.info("DEPMAPCNV 2: processing CL "
+                    + cellLine);
             for(int i = 1; i < line.length; i++) {
                 String cnvValue = line[i];
                 String theGeneForThisItem = genes.get(i-1);
+
+                LOG.info("DEPMAPCNV 3: processing CL "
+                        + cnvValue + " - " + theGeneForThisItem + " - " + cellLine);
+
                 Item CopyNumberItem;
 
                 CopyNumberItem = createItem("DepMapCopyNumber");
 
+
                 if(!cellLine.isEmpty()) {
-                    CopyNumberItem.setReference("depMapID", getCellLine(cellLine));
+                    CopyNumberItem.setReference("cellLine", getCellLine(cellLine));
                 } else {
                     continue;
                 }
 
+                LOG.info("DEPMAPCNV 4: processing CL "
+                        + cnvValue + " - " + theGeneForThisItem + " - " + cellLine);
+
                 if(!theGeneForThisItem.isEmpty()) {
-                    String geneId = getGeneId(theGeneForThisItem);
+                    String geneId = "";
+                    try {
+                        geneId = getGeneId(theGeneForThisItem);
+                    } catch (IllegalArgumentException e) {
+                        continue;
+                    }
 
                     if (StringUtils.isEmpty(geneId)) {
                         continue;
@@ -121,13 +138,20 @@ public class DepmapCnvConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!cnvValue.isEmpty() && StringUtils.isNumeric(cnvValue)) {
+                LOG.info("DEPMAPCNV 5: processing CL "
+                        + cnvValue + " - " + theGeneForThisItem + " - " + cellLine);
+
+                if(!cnvValue.isEmpty()) {
+                    Double cnvValueDouble = Double.valueOf(cnvValue);
+
                     CopyNumberItem.setAttribute("DepmapCnvValue", cnvValue);
+
+                    LOG.info("DEPMAPCNV 6: processing CL "
+                            + cnvValue + " - " + theGeneForThisItem + " - " + cellLine);
+                    store(CopyNumberItem);
                 } else {
                     continue;
                 }
-
-                store(CopyNumberItem);
                 //cellLines.put(cellLine, CopyNumberItem.getIdentifier());
             }
         }
@@ -143,7 +167,12 @@ public class DepmapCnvConverter extends BioDirectoryConverter
             Item gene = createItem("Gene");
             gene.setAttribute("symbol", symbol);
             gene.setReference("organism", getOrganism(TAXON_ID));
-            store(gene);
+            try {
+                store(gene);
+            } catch (IllegalArgumentException e) {
+                //
+            }
+
             geneId = gene.getIdentifier();
             genes.put(symbol, geneId);
         }
@@ -175,6 +204,8 @@ public class DepmapCnvConverter extends BioDirectoryConverter
                 store(cl);
             } catch (ObjectStoreException e) {
                 throw new RuntimeException("failed to store cell line with DepMapID: " + identifier, e);
+            } catch (IllegalArgumentException e) {
+                //
             }
             refId = cl.getIdentifier();
             cellLines.put(identifier, refId);

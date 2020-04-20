@@ -87,7 +87,7 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
         String[] firstLine = (String[]) lineIter.next();
         ArrayList<String> cellLines = new ArrayList<String>();
         for(int i = 1; i < firstLine.length; i++) {
-            String formattedCL = firstLine[i].trim();
+            String formattedCL = firstLine[i].trim().replaceAll("\"", "");
             cellLines.add(formattedCL);
         }
 
@@ -95,16 +95,16 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
         while (lineIter.hasNext()) {
             String[] line = (String[]) lineIter.next();
 
-            String gene = line[0].split(" ")[0].trim();
+            String gene = line[0].split(" ")[0].trim().replaceAll("\"", "");
             for(int i = 1; i < line.length; i++) {
                 String dependencyValue = line[i];
                 String theCLForThisItem = cellLines.get(i-1);
                 Item DEMETER2Item;
 
-                DEMETER2Item = createItem("DEMETER2Dependency");
+                DEMETER2Item = createItem("DepMapDEMETER2Dependency");
 
-                if(!gene.isEmpty()) {
-                    DEMETER2Item.setReference("CCLEName", getCellLine(theCLForThisItem));
+                if(!theCLForThisItem.isEmpty()) {
+                    DEMETER2Item.setReference("cCLEname", getCellLine(theCLForThisItem));
                 } else {
                     continue;
                 }
@@ -121,13 +121,15 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!dependencyValue.isEmpty() && StringUtils.isNumeric(dependencyValue)) {
+                if(!dependencyValue.isEmpty()) {
+                    LOG.info("DEMETER2 1");
                     DEMETER2Item.setAttribute("DepMapDEMETER2DependencyValue", dependencyValue);
+                    store(DEMETER2Item);
                 } else {
                     continue;
                 }
 
-                store(DEMETER2Item);
+                //store(DEMETER2Item);
                 //cellLines.put(cellLine, CopyNumberItem.getIdentifier());
             }
         }
