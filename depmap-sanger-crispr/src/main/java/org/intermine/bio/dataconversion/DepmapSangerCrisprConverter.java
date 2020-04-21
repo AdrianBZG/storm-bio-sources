@@ -136,7 +136,7 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
                     continue;
                 }*/
 
-                if(!effectValue.isEmpty()) {
+                if(!effectValue.isEmpty() && !effectValue.equals("NA")) {
                     LOG.info("SANGER CRISPR 1");
                     SangerCrisprItem.setAttribute("DepmapSangerCrisprGeneEffectValue", effectValue);
                     store(SangerCrisprItem);

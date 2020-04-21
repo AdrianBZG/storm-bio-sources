@@ -125,7 +125,7 @@ public class DepmapAchillesGeneEffectConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!effectValue.isEmpty() && StringUtils.isNumeric(effectValue)) {
+                if(!effectValue.isEmpty() && !effectValue.equals("NA")) {
                     CopyNumberItem.setAttribute("DepmapAchillesGeneEffectValue", effectValue);
                 } else {
                     continue;

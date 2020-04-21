@@ -121,7 +121,7 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!dependencyValue.isEmpty()) {
+                if(!dependencyValue.isEmpty() && !dependencyValue.equals("NA")) {
                     LOG.info("DEMETER2 1");
                     DEMETER2Item.setAttribute("DepMapDEMETER2DependencyValue", dependencyValue);
                     store(DEMETER2Item);
