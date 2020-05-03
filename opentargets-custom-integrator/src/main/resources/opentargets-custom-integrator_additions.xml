@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+    <class name="OpenTargetsDiseaseAssociationsPaper" is-interface="true">
+        <attribute name="pmid" type="java.lang.Integer"/>
+        <attribute name="url" type="java.lang.String"/>
+        <attribute name="doi" type="java.lang.Integer"/>
+        <attribute name="authorString" type="java.lang.String"/>
+        <attribute name="journalTitle" type="java.lang.String"/>
+        <attribute name="pubYear" type="java.lang.Integer"/>
+        <attribute name="title" type="java.lang.String"/>
+        <attribute name="citedByCount" type="java.lang.Integer"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="openTargetsDiseaseAssociationsPapers"/>
+        <reference name="disease" referenced-type="Disease" reverse-reference="openTargetsDiseaseAssociationsPapers"/>
+    </class>
+    <class name="OpenTargetsDiseaseAssociationsScore" is-interface="true">
+        <attribute name="score" type="java.lang.Double"/>
+        <attribute name="nrReferences" type="java.lang.Integer"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="openTargetsDiseaseAssociationsScores"/>
+        <reference name="disease" referenced-type="Disease" reverse-reference="openTargetsDiseaseAssociationsScores"/>
+    </class>
+    <class name="Disease" is-interface="true" extends="BioEntity">
+        <attribute name="name" type="java.lang.String"/>
+        <collection name="openTargetsDiseaseAssociationsScores" referenced-type="OpenTargetsDiseaseAssociationsScore" reverse-reference="disease"/>
+        <collection name="openTargetsDiseaseAssociationsPapers" referenced-type="OpenTargetsDiseaseAssociationsPaper" reverse-reference="disease"/>
+    </class>
+    <class name="Gene" is-interface="true">
+        <collection name="openTargetsDiseaseAssociationsScores" referenced-type="OpenTargetsDiseaseAssociationsScore" reverse-reference="gene"/>
+        <collection name="openTargetsDiseaseAssociationsPapers" referenced-type="OpenTargetsDiseaseAssociationsPaper" reverse-reference="gene"/>
+    </class>
+</classes>
