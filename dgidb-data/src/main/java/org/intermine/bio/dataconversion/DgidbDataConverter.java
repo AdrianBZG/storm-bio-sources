@@ -206,14 +206,15 @@ public class DgidbDataConverter extends BioDirectoryConverter
         if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
         }
-        String geneId = genes.get(resolvedIdentifier);
+        String geneId = genes.get(primaryIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("primaryIdentifier", resolvedIdentifier);
-            gene.setReference("organism", getOrganism(TAXON_ID));
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(resolvedIdentifier, geneId);
+            genes.put(primaryIdentifier, geneId);
         }
         return geneId;
     }

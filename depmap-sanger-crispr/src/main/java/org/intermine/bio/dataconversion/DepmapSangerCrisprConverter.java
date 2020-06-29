@@ -108,7 +108,7 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
 
                 SangerCrisprItem = createItem("DepMapSangerCrisprGeneEffect");
 
-                SangerCrisprItem.setReference("depMapID", getCellLine(cellLine));
+                SangerCrisprItem.setReference("cellLine", getCellLine(cellLine));
 
                 /*if(!cellLine.isEmpty()) {
                     SangerCrisprItem.setReference("depMapID", getCellLine(cellLine));
@@ -150,19 +150,20 @@ public class DepmapSangerCrisprConverter extends BioDirectoryConverter
         }
     }
 
-    private String getGeneId(String symbol) throws ObjectStoreException {
-        //String resolvedIdentifier = resolveGene(primaryIdentifier);
-        /*if (StringUtils.isEmpty(resolvedIdentifier)) {
+    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(primaryIdentifier);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
-        }*/
-        String geneId = genes.get(symbol);
+        }
+        String geneId = genes.get(primaryIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
-            gene.setAttribute("symbol", symbol);
-            gene.setReference("organism", getOrganism(TAXON_ID));
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(symbol, geneId);
+            genes.put(primaryIdentifier, geneId);
         }
         return geneId;
     }

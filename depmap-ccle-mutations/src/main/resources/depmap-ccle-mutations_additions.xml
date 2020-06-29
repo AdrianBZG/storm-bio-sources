@@ -4,7 +4,7 @@
 <classes>
     <classes>
         <class name="DepMapMutations" is-interface="true">
-            <reference name="depMapID" referenced-type="CellLine" reverse-reference="depMapMutations"/>
+            <reference name="cellLine" referenced-type="CellLine" reverse-reference="depMapMutations"/>
             <reference name="gene" referenced-type="Gene" reverse-reference="depMapMutations"/>
             <attribute name="Chromosome" type="java.lang.String"/>
             <attribute name="Start" type="java.lang.Integer"/>
@@ -25,7 +25,7 @@
             <collection name="depMapMutations" referenced-type="DepMapMutations" reverse-reference="gene"/>
         </class>
         <class name="CellLine" is-interface="true" extends="BioEntity">
-            <collection name="depMapMutations" referenced-type="DepMapMutations" reverse-reference="depMapID"/>
+            <collection name="depMapMutations" referenced-type="DepMapMutations" reverse-reference="cellLine"/>
         </class>
     </classes>
 

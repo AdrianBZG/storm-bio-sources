@@ -79,7 +79,7 @@ public class DepmapCcleMutationsConverter extends BioDirectoryConverter
     }
 
     private void processMutationsData(Reader reader) throws ObjectStoreException, IOException {
-        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
+        Iterator<?> lineIter = FormattedTextParser.parseTabDelimitedReader(reader);
 
         // Skip header
         lineIter.next();
@@ -130,7 +130,7 @@ public class DepmapCcleMutationsConverter extends BioDirectoryConverter
 
 
             if(!DepMapID.isEmpty()) {
-                mutationsItem.setReference("depMapID", getCellLine(DepMapID));
+                mutationsItem.setReference("cellLine", getCellLine(DepMapID));
             } else {
                 continue;
             }
@@ -235,19 +235,20 @@ public class DepmapCcleMutationsConverter extends BioDirectoryConverter
         }
     }
 
-    private String getGeneId(String symbol) throws ObjectStoreException {
-        //String resolvedIdentifier = resolveGene(primaryIdentifier);
-        /*if (StringUtils.isEmpty(resolvedIdentifier)) {
+    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(primaryIdentifier);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
-        }*/
-        String geneId = genes.get(symbol);
+        }
+        String geneId = genes.get(primaryIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
-            gene.setAttribute("symbol", symbol);
-            gene.setReference("organism", getOrganism(TAXON_ID));
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(symbol, geneId);
+            genes.put(primaryIdentifier, geneId);
         }
         return geneId;
     }

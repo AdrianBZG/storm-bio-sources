@@ -3,7 +3,7 @@
 
 <classes>
     <class name="DepMapDEMETER2Dependency" is-interface="true">
-        <reference name="cCLEname" referenced-type="CellLine" reverse-reference="depMapDEMETER2Dependency"/>
+        <reference name="cellLine" referenced-type="CellLine" reverse-reference="depMapDEMETER2Dependency"/>
         <reference name="gene" referenced-type="Gene" reverse-reference="depMapDEMETER2Dependency"/>
         <attribute name="DepMapDEMETER2DependencyValue" type="java.lang.Double"/>
     </class>
@@ -11,6 +11,6 @@
         <collection name="depMapDEMETER2Dependency" referenced-type="DepMapDEMETER2Dependency" reverse-reference="gene"/>
     </class>
     <class name="CellLine" is-interface="true" extends="BioEntity">
-        <collection name="depMapDEMETER2Dependency" referenced-type="DepMapDEMETER2Dependency" reverse-reference="cCLEname"/>
+        <collection name="depMapDEMETER2Dependency" referenced-type="DepMapDEMETER2Dependency" reverse-reference="cellLine"/>
     </class>
 </classes>

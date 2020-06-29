@@ -3,7 +3,7 @@
 
 <classes>
     <class name="DepMapExpression" is-interface="true">
-        <reference name="depMapID" referenced-type="CellLine" reverse-reference="depMapExpression"/>
+        <reference name="cellLine" referenced-type="CellLine" reverse-reference="depMapExpression"/>
         <reference name="gene" referenced-type="Gene" reverse-reference="depMapExpression"/>
         <attribute name="DepmapExpressionValue" type="java.lang.Double"/>
     </class>
@@ -11,6 +11,6 @@
         <collection name="depMapExpression" referenced-type="DepMapExpression" reverse-reference="gene"/>
     </class>
     <class name="CellLine" is-interface="true" extends="BioEntity">
-        <collection name="depMapExpression" referenced-type="DepMapExpression" reverse-reference="depMapID"/>
+        <collection name="depMapExpression" referenced-type="DepMapExpression" reverse-reference="cellLine"/>
     </class>
 </classes>

@@ -89,16 +89,16 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
             }
 
             String CCLEname = line[2];
-            String Lineage = line[5];
-            String LineageSubtype = line[6];
-            String LineageSubsubtype = line[7];
-            String Sex = line[8];
-            String PrimaryOrMetastasis = line[17];
-            String Disease = line[18];
-            String DiseaseSubtype = line[19];
+            String Lineage = line[20];
+            String LineageSubtype = line[21];
+            String LineageSubsubtype = line[22];
+            String Sex = line[5];
+            String PrimaryOrMetastasis = line[14];
+            String Disease = line[15];
+            String DiseaseSubtype = line[16];
             String Age = "Not specified";
-            if(!line[20].isEmpty()) {
-                Age = Double.toString(Math.floor(Double.valueOf(line[20])));
+            if(!line[17].isEmpty()) {
+                Age = Double.toString(Math.floor(Double.valueOf(line[17])));
             }
 
             if(Lineage.isEmpty()) {

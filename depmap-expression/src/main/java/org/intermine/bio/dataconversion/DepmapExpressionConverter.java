@@ -40,7 +40,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
 
     private static final String TAXON_ID = "9606"; // Human Taxon ID
 
-    private static final String EXPRESSION_CSV_FILE = "CCLE_expression_full.csv";
+    private static final String EXPRESSION_CSV_FILE = "CCLE_expression.csv";
 
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> cellLines = new HashMap<String, String>();
@@ -84,7 +84,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
     }
 
     private void processExpressionData(Reader reader) throws ObjectStoreException, IOException {
-        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
+        Iterator<?> lineIter = FormattedTextParser.parseTabDelimitedReader(reader);
         // header
         String[] firstLine = (String[]) lineIter.next();
         ArrayList<String> genes = new ArrayList<String>();
@@ -106,7 +106,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                 ExpressionItem = createItem("DepMapExpression");
 
                 if(!cellLine.isEmpty()) {
-                    ExpressionItem.setReference("depMapID", getCellLine(cellLine));
+                    ExpressionItem.setReference("cellLine", getCellLine(cellLine));
                 } else {
                     continue;
                 }
@@ -135,19 +135,20 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         }
     }
 
-    private String getGeneId(String symbol) throws ObjectStoreException {
-        //String resolvedIdentifier = resolveGene(primaryIdentifier);
-        /*if (StringUtils.isEmpty(resolvedIdentifier)) {
+    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(primaryIdentifier);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
-        }*/
-        String geneId = genes.get(symbol);
+        }
+        String geneId = genes.get(primaryIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
-            gene.setAttribute("symbol", symbol);
-            gene.setReference("organism", getOrganism(TAXON_ID));
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(symbol, geneId);
+            genes.put(primaryIdentifier, geneId);
         }
         return geneId;
     }
