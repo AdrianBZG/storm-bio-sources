@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+    <class name="STORMTargetAnalyses" is-interface="true">
+        <reference name="gene" referenced-type="Gene" reverse-reference="StormTargetAnalysis"/>
+        <attribute name="screen" type="java.lang.String"/>
+        <attribute name="median" type="java.lang.Double"/>
+        <attribute name="effectFraction" type="java.lang.Double"/>
+        <attribute name="commonEssential" type="java.lang.Double"/>
+        <attribute name="skewedLrt" type="java.lang.Double"/>
+        <attribute name="outliersCount" type="java.lang.Integer"/>
+        <attribute name="outliersMeanZscore" type="java.lang.Double"/>
+        <attribute name="outliersCellLines" type="java.lang.String"/>
+        <attribute name="outliersTopLineage" type="java.lang.String"/>
+        <attribute name="outliersLineageCount" type="java.lang.Integer"/>
+        <attribute name="outliersLineagePvalue" type="java.lang.Double"/>
+        <attribute name="outliersLineageQvalue" type="java.lang.Double"/>
+        <attribute name="broadSangerCor" type="java.lang.Double"/>
+        <attribute name="broadSangerDiff" type="java.lang.Double"/>
+        <attribute name="broadShrnaCor" type="java.lang.Double"/>
+        <attribute name="broadShrnaDiff" type="java.lang.Double"/>
+        <attribute name="sangerShrnaCor" type="java.lang.Double"/>
+        <attribute name="sangerShrnaDiff" type="java.lang.Double"/>
+    </class>
+    <class name="Gene" is-interface="true" extends="BioEntity">
+        <collection name="StormTargetAnalysis" referenced-type="STORMTargetAnalyses" reverse-reference="gene"/>
+    </class>
+</classes>
+

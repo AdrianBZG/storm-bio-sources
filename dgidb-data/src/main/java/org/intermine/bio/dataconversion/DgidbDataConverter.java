@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,6 +54,49 @@ public class DgidbDataConverter extends BioDirectoryConverter
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
 
+    // Methods to integrate the data only for a list of genes
+    private static final String GENE_LIST_FILE = "/data/storm/targets/storm_targets_symbols.csv";
+    private ArrayList<String> processGeneList(String geneListFile) throws Exception {
+        File geneListF = new File(geneListFile);
+
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(new FileReader(geneListF));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+            String gene = line[0];
+            if(StringUtils.isEmpty(gene)) {
+                continue;
+            }
+
+            String resolvedGeneIdentifier = getGeneIdentifier(gene);
+            if(resolvedGeneIdentifier != null) {
+                geneListArray.add(resolvedGeneIdentifier);
+            }
+        }
+
+        return geneListArray;
+    }
+
+    private String getGeneIdentifier(String geneSymbol) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(geneSymbol);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
+        }
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+    //
+
     /**
      * Constructor
      * @param writer the ItemWriter used to handle the resultant items
@@ -76,8 +120,13 @@ public class DgidbDataConverter extends BioDirectoryConverter
 
         organismIdentifier = getOrganism(TAXON_ID);
 
+        ArrayList<String> geneListArray = new ArrayList<String>();
+        if(!StringUtils.isEmpty(GENE_LIST_FILE)) {
+            geneListArray = processGeneList(GENE_LIST_FILE);
+        }
+
         processDrugs(new FileReader(files.get(DRUGS_TSV_FILE)));
-        processInteractions(new FileReader(files.get(INTERACTIONS_TSV_FILE)));
+        processInteractions(new FileReader(files.get(INTERACTIONS_TSV_FILE)), geneListArray);
 
     }
 
@@ -123,7 +172,7 @@ public class DgidbDataConverter extends BioDirectoryConverter
         }
     }
 
-    private void processInteractions(Reader reader) throws ObjectStoreException, IOException {
+    private void processInteractions(Reader reader, ArrayList<String> geneList) throws ObjectStoreException, IOException {
         Iterator<?> lineIter = FormattedTextParser.parseTabDelimitedReader(reader);
         // Skip header
         lineIter.next();
@@ -138,6 +187,14 @@ public class DgidbDataConverter extends BioDirectoryConverter
             if(geneSymbol.isEmpty()) {
                 continue;
             }
+
+            if(!geneList.isEmpty()) {
+                String resolvedGene = getGeneIdentifier(geneSymbol);
+                if(!geneList.contains(resolvedGene)) {
+                    continue;
+                }
+            }
+
             String chemblId = line[8];
 
             String interactionType = line[4];
@@ -157,8 +214,10 @@ public class DgidbDataConverter extends BioDirectoryConverter
             interactionItem = createItem("DrugInteraction");
             interactionItem.setReference("gene", geneId);
             interactionItem.setReference("drug", getDrug(chemblId));
-            if(!interactionType.isEmpty()) {
+            if(!StringUtils.isEmpty(interactionType)) {
                 interactionItem.setAttribute("type", interactionType);
+            } else {
+                continue;
             }
 
             if(!pubmedId.isEmpty()) {
@@ -206,7 +265,7 @@ public class DgidbDataConverter extends BioDirectoryConverter
         if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
         }
-        String geneId = genes.get(primaryIdentifier);
+        String geneId = genes.get(resolvedIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("primaryIdentifier", resolvedIdentifier);
@@ -214,7 +273,7 @@ public class DgidbDataConverter extends BioDirectoryConverter
             //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(primaryIdentifier, geneId);
+            genes.put(resolvedIdentifier, geneId);
         }
         return geneId;
     }

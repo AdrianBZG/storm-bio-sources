@@ -27,7 +27,6 @@ import org.intermine.objectstore.ObjectStoreException;
 import org.intermine.util.FormattedTextParser;
 import org.intermine.xml.full.Item;
 
-
 /**
  * 
  * @author
@@ -49,6 +48,50 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
     private static final Logger LOG = Logger.getLogger(TcgaSomaticMutationConverter.class);
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
+
+    // Methods to integrate the data only for a list of genes
+    private static final String GENE_LIST_FILE = "/data/storm/targets/storm_targets_symbols.csv";
+    private ArrayList<String> processGeneList(String geneListFile) throws Exception {
+        File geneListF = new File(geneListFile);
+
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(new FileReader(geneListF));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+            String gene = line[0];
+            if(StringUtils.isEmpty(gene)) {
+                continue;
+            }
+
+            String resolvedGeneIdentifier = getGeneIdentifier(gene);
+            if(resolvedGeneIdentifier != null) {
+                geneListArray.add(resolvedGeneIdentifier);
+            }
+        }
+
+        return geneListArray;
+    }
+
+    private String getGeneIdentifier(String geneSymbol) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(geneSymbol);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
+        }
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+    //
+
     /**
      * Constructor
      * @param writer the ItemWriter used to handle the resultant items
@@ -71,7 +114,13 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
 
         organismIdentifier = getOrganism(TAXON_ID);
 
-        processMutationData(new FileReader(files.get(MUTATION_TSV_FILE)));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+        if(!StringUtils.isEmpty(GENE_LIST_FILE)) {
+            geneListArray = processGeneList(GENE_LIST_FILE);
+        }
+
+        processMutationData(new FileReader(files.get(MUTATION_TSV_FILE)), geneListArray);
+
     }
 
     private Map<String, File> readFilesInDir(File dir) {
@@ -82,7 +131,7 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
         return files;
     }
 
-    private void processMutationData(Reader reader) throws ObjectStoreException, IOException {
+    private void processMutationData(Reader reader, ArrayList<String> geneList) throws ObjectStoreException, IOException {
         Iterator<?> lineIter = FormattedTextParser.parseTabDelimitedReader(reader);
         // header
         String[] firstLine = (String[]) lineIter.next();
@@ -97,12 +146,20 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
             String[] line = (String[]) lineIter.next();
 
             String gene = line[0];
+
+            if(!geneList.isEmpty()) {
+                String resolvedGene = getGeneIdentifier(gene);
+                if(!geneList.contains(resolvedGene)) {
+                    continue;
+                }
+            }
+
             for(int i = 1; i < line.length; i++) {
                 String mutationValue = line[i];
                 String theSampleForThisItem = samples.get(i-1);
-                Item ExpressionItem;
+                Item MutationItem;
 
-                ExpressionItem = createItem("TCGAMutation");
+                MutationItem = createItem("TCGAMutation");
 
                 if(!gene.isEmpty()) {
                     String geneId = getGeneId(gene);
@@ -111,24 +168,24 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
                         continue;
                     }
 
-                    ExpressionItem.setReference("gene", geneId);
+                    MutationItem.setReference("gene", geneId);
                 } else {
                     continue;
                 }
 
                 if(!theSampleForThisItem.isEmpty()) {
-                    ExpressionItem.setReference("HumanSample", getSample(theSampleForThisItem));
+                    MutationItem.setReference("sample", getSample(theSampleForThisItem));
                 } else {
                     continue;
                 }
 
                 if(!mutationValue.isEmpty() && StringUtils.isNumeric(mutationValue)) {
-                    ExpressionItem.setAttribute("TcgaSomaticMutationValue", mutationValue);
+                    MutationItem.setAttribute("TcgaSomaticMutationValue", mutationValue);
                 } else {
                     continue;
                 }
 
-                store(ExpressionItem);
+                store(MutationItem);
                 //cellLines.put(cellLine, CopyNumberItem.getIdentifier());
             }
         }
@@ -139,7 +196,7 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
         if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
         }
-        String geneId = genes.get(primaryIdentifier);
+        String geneId = genes.get(resolvedIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("primaryIdentifier", resolvedIdentifier);
@@ -147,7 +204,7 @@ public class TcgaSomaticMutationConverter extends BioDirectoryConverter
             //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(primaryIdentifier, geneId);
+            genes.put(resolvedIdentifier, geneId);
         }
         return geneId;
     }

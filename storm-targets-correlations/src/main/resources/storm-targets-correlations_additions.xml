@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+    <class name="STORMTargetCorrelations" is-interface="true">
+        <reference name="gene1" referenced-type="Gene" reverse-reference="StormTargetCorrelation"/>
+        <reference name="gene2" referenced-type="Gene"/>
+        <attribute name="experimentType" type="java.lang.String"/>
+        <attribute name="nsize" type="java.lang.Integer"/>
+        <attribute name="correlation" type="java.lang.Double"/>
+        <attribute name="pvalue" type="java.lang.Double"/>
+        <attribute name="fdr" type="java.lang.Double"/>
+    </class>
+    <class name="Gene" is-interface="true" extends="BioEntity">
+        <collection name="StormTargetCorrelation" referenced-type="STORMTargetCorrelations" reverse-reference="gene1"/>
+    </class>
+</classes>

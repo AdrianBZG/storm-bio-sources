@@ -36,7 +36,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
 {
     //
     private static final String DATASET_TITLE = "DepMap Expression Data";
-    private static final String DATA_SOURCE_NAME = "DepMap Public 19Q3";
+    private static final String DATA_SOURCE_NAME = "DepMap Public 20Q3";
 
     private static final String TAXON_ID = "9606"; // Human Taxon ID
 
@@ -50,6 +50,49 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
 
+    // Methods to integrate the data only for a list of genes
+    private static final String GENE_LIST_FILE = "/data/storm/targets/storm_targets_symbols.csv";
+    private ArrayList<String> processGeneList(String geneListFile) throws Exception {
+        File geneListF = new File(geneListFile);
+
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(new FileReader(geneListF));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+            String gene = line[0];
+            if(StringUtils.isEmpty(gene)) {
+                continue;
+            }
+
+            String resolvedGeneIdentifier = getGeneIdentifier(gene);
+            if(resolvedGeneIdentifier != null) {
+                geneListArray.add(resolvedGeneIdentifier);
+            }
+        }
+
+        return geneListArray;
+    }
+
+    private String getGeneIdentifier(String geneSymbol) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(geneSymbol);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
+        }
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+    //
+
     /**
      * Constructor
      * @param writer the ItemWriter used to handle the resultant items
@@ -59,6 +102,23 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         super(writer, model, DATA_SOURCE_NAME, DATASET_TITLE);
         if (rslv == null) {
             rslv = IdResolverService.getIdResolverByOrganism(TAXON_ID);
+        }
+    }
+
+    private boolean isDouble(String str) {
+        try {
+            // check if it can be parsed as any double
+            double x = Double.parseDouble(str);
+            // check if the double can be converted without loss to an int
+            if (x == (int) x)
+                // if yes, this is an int, thus return false
+                return false;
+            // otherwise, this cannot be converted to an int (e.g. "1.2")
+            return true;
+            // short version: return x != (int) x;
+        }
+        catch(NumberFormatException e) {
+            return false;
         }
     }
 
@@ -72,7 +132,12 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
 
         organismIdentifier = getOrganism(TAXON_ID);
 
-        processExpressionData(new FileReader(files.get(EXPRESSION_CSV_FILE)));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+        if(!StringUtils.isEmpty(GENE_LIST_FILE)) {
+            geneListArray = processGeneList(GENE_LIST_FILE);
+        }
+
+        processExpressionData(new FileReader(files.get(EXPRESSION_CSV_FILE)), geneListArray);
     }
 
     private Map<String, File> readFilesInDir(File dir) {
@@ -83,8 +148,8 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         return files;
     }
 
-    private void processExpressionData(Reader reader) throws ObjectStoreException, IOException {
-        Iterator<?> lineIter = FormattedTextParser.parseTabDelimitedReader(reader);
+    private void processExpressionData(Reader reader, ArrayList<String> geneList) throws ObjectStoreException, IOException {
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
         // header
         String[] firstLine = (String[]) lineIter.next();
         ArrayList<String> genes = new ArrayList<String>();
@@ -101,6 +166,14 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
             for(int i = 1; i < line.length; i++) {
                 String expressionValue = line[i];
                 String theGeneForThisItem = genes.get(i-1);
+
+                if(!geneList.isEmpty()) {
+                    String resolvedGene = getGeneIdentifier(theGeneForThisItem);
+                    if(!geneList.contains(resolvedGene)) {
+                        continue;
+                    }
+                }
+
                 Item ExpressionItem;
 
                 ExpressionItem = createItem("DepMapExpression");
@@ -123,7 +196,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                     continue;
                 }
 
-                if(!expressionValue.isEmpty()) {
+                if(!expressionValue.isEmpty() && isDouble(expressionValue)) {
                     ExpressionItem.setAttribute("DepmapExpressionValue", expressionValue);
                 } else {
                     continue;
@@ -140,7 +213,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
         }
-        String geneId = genes.get(primaryIdentifier);
+        String geneId = genes.get(resolvedIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("primaryIdentifier", resolvedIdentifier);
@@ -148,7 +221,7 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
             //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(primaryIdentifier, geneId);
+            genes.put(resolvedIdentifier, geneId);
         }
         return geneId;
     }

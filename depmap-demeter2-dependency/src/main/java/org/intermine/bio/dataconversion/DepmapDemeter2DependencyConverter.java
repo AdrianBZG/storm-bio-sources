@@ -50,6 +50,49 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
 
     private String organismIdentifier; // Not the taxon ID. It references the object that is created into the database.
 
+    // Methods to integrate the data only for a list of genes
+    private static final String GENE_LIST_FILE = "/data/storm/targets/storm_targets_symbols.csv";
+    private ArrayList<String> processGeneList(String geneListFile) throws Exception {
+        File geneListF = new File(geneListFile);
+
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(new FileReader(geneListF));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+            String gene = line[0];
+            if(StringUtils.isEmpty(gene)) {
+                continue;
+            }
+
+            String resolvedGeneIdentifier = getGeneIdentifier(gene);
+            if(resolvedGeneIdentifier != null) {
+                geneListArray.add(resolvedGeneIdentifier);
+            }
+        }
+
+        return geneListArray;
+    }
+
+    private String getGeneIdentifier(String geneSymbol) throws ObjectStoreException {
+        String resolvedIdentifier = resolveGene(geneSymbol);
+        if (StringUtils.isEmpty(resolvedIdentifier)) {
+            return null;
+        }
+        String geneId = genes.get(resolvedIdentifier);
+        if (geneId == null) {
+            Item gene = createItem("Gene");
+            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            //gene.setAttribute("symbol", primaryIdentifier);
+            //gene.setReference("organism", getOrganism(TAXON_ID));
+            store(gene);
+            geneId = gene.getIdentifier();
+            genes.put(resolvedIdentifier, geneId);
+        }
+        return geneId;
+    }
+    //
+
 
     /**
      * Constructor
@@ -69,7 +112,12 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
 
         organismIdentifier = getOrganism(TAXON_ID);
 
-        processDependency(new FileReader(files.get(CN_CSV_FILE)));
+        ArrayList<String> geneListArray = new ArrayList<String>();
+        if(!StringUtils.isEmpty(GENE_LIST_FILE)) {
+            geneListArray = processGeneList(GENE_LIST_FILE);
+        }
+
+        processDependency(new FileReader(files.get(CN_CSV_FILE)), geneListArray);
 
     }
 
@@ -81,7 +129,7 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
         return files;
     }
 
-    private void processDependency(Reader reader) throws ObjectStoreException, IOException {
+    private void processDependency(Reader reader, ArrayList<String> geneList) throws ObjectStoreException, IOException {
         Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
         // header
         String[] firstLine = (String[]) lineIter.next();
@@ -96,6 +144,14 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
             String[] line = (String[]) lineIter.next();
 
             String gene = line[0].split(" ")[0].trim().replaceAll("\"", "");
+
+            if(!geneList.isEmpty()) {
+                String resolvedGene = getGeneIdentifier(gene);
+                if(!geneList.contains(resolvedGene)) {
+                    continue;
+                }
+            }
+
             for(int i = 1; i < line.length; i++) {
                 String dependencyValue = line[i];
                 String theCLForThisItem = cellLines.get(i-1);
@@ -140,7 +196,7 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
         if (StringUtils.isEmpty(resolvedIdentifier)) {
             return null;
         }
-        String geneId = genes.get(primaryIdentifier);
+        String geneId = genes.get(resolvedIdentifier);
         if (geneId == null) {
             Item gene = createItem("Gene");
             gene.setAttribute("primaryIdentifier", resolvedIdentifier);
@@ -148,7 +204,7 @@ public class DepmapDemeter2DependencyConverter extends BioDirectoryConverter
             //gene.setReference("organism", getOrganism(TAXON_ID));
             store(gene);
             geneId = gene.getIdentifier();
-            genes.put(primaryIdentifier, geneId);
+            genes.put(resolvedIdentifier, geneId);
         }
         return geneId;
     }

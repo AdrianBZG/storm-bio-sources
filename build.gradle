@@ -1,5 +1,3 @@
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Copy
-
 buildscript {
     repositories {
         mavenLocal()
@@ -10,6 +8,8 @@ buildscript {
     }
     dependencies {
         classpath group: 'org.intermine', name: 'plugin', version: System.getProperty("imVersion")
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.6.2"
     }
 }
 
@@ -21,12 +21,14 @@ ext {
 
 subprojects {
     group = 'org.intermine'
-    version = '2.0.0'
+    version = '4.2.0'
 
     apply plugin: 'java'
     apply plugin: 'maven'
     apply plugin: 'dbmodel'
     apply plugin: 'biosource-dbmodel'
+    apply plugin: "checkstyle"
+    apply plugin: 'com.jfrog.bintray'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -77,14 +79,78 @@ subprojects {
         exclude "intermine.properties"
     }
 
+    checkstyle {
+        toolVersion '7.8.1'
+        configFile file("../config/checkstyle/checkstyle.xml")
+        sourceSets = [sourceSets.main]
+        showViolations = true
+        ignoreFailures = false
+        maxWarnings = 0
+        //reportsDir = file("$project.rootDir/reports/checkstyle/$project.name")
+        configProperties = [
+                'checkstyle.header.file': "config/checkstyle/copyright_header.txt",
+                'suppressionFile': "config/checkstyle/suppressions.xml"
+        ]
+    }
+
+    checkstyleMain {
+        source = fileTree('src/main') {
+            includes = ['**/*.java']
+            excludes = ['build/**']
+        }
+    }
+
+    checkstyleTest {
+        enabled = false
+    }
+
     tasks.withType(Test) {
         scanForTestClasses = false
         include '**/*Test.class'
     }
 
     test {
-        ignoreFailures = true
+        ignoreFailures = false
         forkEvery = 1
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
+    }
+
+    bintray {
+        user = System.getenv('BINTRAY_USER')
+        key = System.getenv('BINTRAY_KEY')
+        dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
+        publish = true //[Default: false] Whether version should be auto published after an upload
+        override = true //[Default: false] Whether to override version artifacts already published
+        pkg {
+            repo = 'humanmine-sources'
+            name = project.name
+            userOrg = user
+            licenses = ['LGPL-2.1']
+            vcsUrl = 'https://github.com/intermine/humanmine-bio-sources.git'
+            publicDownloadNumbers = true
+            version {
+                name = '4.2.0'
+                desc = 'HumanMine 4.2.0'
+                vcsTag = 'humanmine-4.2.0'
+            }
+        }
+
+        configurations = ['archives']
     }
 }
 
