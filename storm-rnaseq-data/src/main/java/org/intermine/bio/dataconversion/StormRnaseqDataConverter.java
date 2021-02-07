@@ -33,12 +33,13 @@ import org.intermine.xml.full.Item;
  */
 public class StormRnaseqDataConverter extends BioDirectoryConverter
 {
-    private static final String DATASET_TITLE = "STORM Correlations Analyses";
-    private static final String DATA_SOURCE_NAME = "Results for the 2020 correlations analyses on STORM Targets";
+    private static final String DATASET_TITLE = "STORM RNA-Seq Data";
+    private static final String DATA_SOURCE_NAME = "STORM RNA-Seq Data";
 
     private static final String TAXON_ID = "9606"; // Human Taxon ID
 
     private Map<String, String> genes = new HashMap<String, String>();
+    private ArrayList<String> conditions = new ArrayList<String>();
 
     protected IdResolver rslv;
     private static final Logger LOG = Logger.getLogger(StormRnaseqDataConverter.class);
@@ -58,18 +59,145 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
 
         for (Map.Entry<String, File> entry : directories.entrySet()) {
             File theFolder = entry.getValue();
-            String folderName = entry.getKey();
+            String experimentFolderName = entry.getKey();
             Map<String, File> files = readFilesInDir(theFolder);
             for (Map.Entry<String, File> fileEntry : files.entrySet()) {
-                processCellLineRNASeqExperiment(new FileReader(fileEntry.getValue()), folderName);
+                String cellLineFolderName = fileEntry.getKey();
+                String experimentName = experimentFolderName + "-" + cellLineFolderName;
+
+                String rootFolder = theFolder.getAbsolutePath();
+
+                // Sample info
+                String sampleInfoPath = rootFolder.concat(cellLineFolderName + "_sample_info.csv")
+                processRNASeqExperimentSampleInfo(new FileReader(sampleInfoPath), experimentName);
+
+                // Gene counts
+                String countsPath = rootFolder.concat("merged_gene_counts.txt")
+                processRNASeqExperimentGeneCount(new FileReader(countsPath), experimentName);
+
                 break;
             }
         }
 
     }
 
-    private void processCellLineRNASeqExperiment(Reader reader, String type) throws ObjectStoreException, IOException {
+    private void processRNASeqExperimentSampleInfo(Reader reader, String experimentName) throws ObjectStoreException, IOException {
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
+        String[] firstLine = (String[]) lineIter.next();
 
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+
+            String run = line[0];
+            String sample = line[1];
+            String condition = line[2];
+            String cellLine = line[3];
+            String IFN_gamma = line[4];
+            String compound = line[5];
+            String concentration = line[6];
+            String replicate = line[7];
+            String timepoint = line[8];
+
+            Item IntegratedItem = createItem("RNASeqExperimentSampleInfo");
+
+            if(!StringUtils.isEmpty(run)) {
+                IntegratedItem.setAttribute("run", run);
+            } else {
+                continue;
+            }
+
+            if(!StringUtils.isEmpty(sample)) {
+                IntegratedItem.setAttribute("sample", sample);
+            }
+
+            if(!StringUtils.isEmpty(condition)) {
+                IntegratedItem.setAttribute("condition", condition);
+
+                if(!condition.contains("DMSO")) {
+                    if(!conditions.contains(condition)) {
+                        conditions.add(condition);
+                    }
+                }
+            }
+
+            if(!StringUtils.isEmpty(cellLine)) {
+                IntegratedItem.setAttribute("cellLine", cellLine);
+            }
+
+            if(!StringUtils.isEmpty(IFN_gamma)) {
+                IntegratedItem.setAttribute("IFN_gamma", IFN_gamma);
+            }
+
+            if(!StringUtils.isEmpty(compound)) {
+                IntegratedItem.setAttribute("compound", compound);
+            }
+
+            if(!StringUtils.isEmpty(concentration) && isDouble(concentration)) {
+                IntegratedItem.setAttribute("concentration", concentration);
+            }
+
+            if(!StringUtils.isEmpty(replicate)) {
+                IntegratedItem.setAttribute("replicate", replicate);
+            }
+
+            if(!StringUtils.isEmpty(timepoint)) {
+                IntegratedItem.setAttribute("timepoint", timepoint);
+            }
+
+            IntegratedItem.setAttribute("experiment", experimentName);
+
+            store(IntegratedItem);
+        }
+    }
+
+    private void processRNASeqExperimentGeneCount(Reader reader, String experimentName) throws ObjectStoreException, IOException {
+        Iterator<?> lineIter = FormattedTextParser.parseTsvDelimitedReader(reader);
+
+        String[] firstLine = (String[]) lineIter.next();
+        ArrayList<String> runs = new ArrayList<String>();
+        for(int i = 2; i < firstLine.length; i++) {
+            String run = firstLine[i];
+            runs.add(run);
+        }
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+
+            String gene = line[1];
+
+            for(int i = 2; i < line.length; i++) {
+                String count = line[i];
+                String runForThisItem = runs.get(i-2);
+
+                Item IntegratedItem = createItem("RNASeqExperimentGeneCount");
+
+                if(!gene.isEmpty()) {
+                    String geneId = getGeneId(gene);
+
+                    if (StringUtils.isEmpty(geneId)) {
+                        continue;
+                    }
+
+                    IntegratedItem.setReference("gene", geneId);
+                } else {
+                    continue;
+                }
+
+                if(!StringUtils.isEmpty(runForThisItem)) {
+                    IntegratedItem.setAttribute("run", runForThisItem);
+                } else {
+                    continue;
+                }
+
+                if(!StringUtils.isEmpty(count)) {
+                    IntegratedItem.setAttribute("count", count);
+                }
+
+                IntegratedItem.setAttribute("experiment", experimentName);
+
+                store(IntegratedItem);
+            }
+        }
     }
 
     private Map<String, File> readDirectoriesInDir(File dir) {
@@ -100,8 +228,6 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
             if (geneId == null) {
                 Item gene = createItem("Gene");
                 gene.setAttribute("primaryIdentifier", resolvedIdentifier);
-                //gene.setAttribute("symbol", primaryIdentifier);
-                //gene.setReference("organism", getOrganism(TAXON_ID));
                 store(gene);
                 geneId = gene.getIdentifier();
                 genes.put(resolvedIdentifier, geneId);
@@ -126,5 +252,17 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
             id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
         }
         return id;
+    }
+
+    private boolean isDouble(String str) {
+        try {
+            double x = Double.parseDouble(str);
+            if (x == (int) x)
+                return false;
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
     }
 }
