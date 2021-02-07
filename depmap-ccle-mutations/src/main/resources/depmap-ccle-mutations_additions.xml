@@ -28,6 +28,4 @@
             <collection name="depMapMutations" referenced-type="DepMapMutations" reverse-reference="cellLine"/>
         </class>
     </classes>
-
-
 </classes>

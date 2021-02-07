@@ -35,3 +35,5 @@ include ':bio-source-StormRNASeqData'
 project(':bio-source-StormRNASeqData').projectDir = new File(settingsDir, './StormRNASeqData')
 include ':bio-source-storm-rnaseq-data'
 project(':bio-source-storm-rnaseq-data').projectDir = new File(settingsDir, './storm-rnaseq-data')
+include ':bio-source-depmap-proteomics'
+project(':bio-source-depmap-proteomics').projectDir = new File(settingsDir, './depmap-proteomics')
