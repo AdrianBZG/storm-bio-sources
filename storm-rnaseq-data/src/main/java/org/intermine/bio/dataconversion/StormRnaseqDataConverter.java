@@ -14,12 +14,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.tools.ant.BuildException;
 import org.intermine.dataconversion.ItemWriter;
 import org.intermine.metadata.Model;
 import org.intermine.objectstore.ObjectStoreException;
@@ -37,9 +39,15 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
     private static final String DATA_SOURCE_NAME = "STORM RNA-Seq Data";
 
     private static final String TAXON_ID = "9606"; // Human Taxon ID
+    private String configFile = null;
 
     private Map<String, String> genes = new HashMap<String, String>();
     private ArrayList<String> conditions = new ArrayList<String>();
+
+    private Map<String, String> experiments = new HashMap<String, String>();
+    private Map<String, String> experimentsSampleInfoPath = new HashMap<String, String>();
+    private Map<String, String> experimentsGeneCountsPath = new HashMap<String, String>();
+    private Map<String, String> experimentsDESEQ2Path = new HashMap<String, String>();
 
     protected IdResolver rslv;
     private static final Logger LOG = Logger.getLogger(StormRnaseqDataConverter.class);
@@ -52,36 +60,78 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
         }
     }
 
+
+    public void setConfigFile(String configFile) {
+        this.configFile = configFile;
+    }
+
     public void process(File dataDir) throws Exception {
         organismIdentifier = getOrganism(TAXON_ID);
 
         Map<String, File> directories = readDirectoriesInDir(dataDir);
 
+        if (this.configFile == null) {
+            throw new BuildException("configFile attribute is not set");
+        }
+
+        // Load the config file
+        processConfigFile(new FileReader(dataDir + "/config.csv"));
+        //
+
         for (Map.Entry<String, File> entry : directories.entrySet()) {
             File theFolder = entry.getValue();
             String experimentFolderName = entry.getKey();
-            Map<String, File> files = readFilesInDir(theFolder);
-            for (Map.Entry<String, File> fileEntry : files.entrySet()) {
-                String cellLineFolderName = fileEntry.getKey();
-                String experimentName = experimentFolderName + "-" + cellLineFolderName;
+            if(experiments.get(experimentFolderName) != null && experimentsSampleInfoPath.get(experimentFolderName) != null && experimentsGeneCountsPath.get(experimentFolderName) != null) {
+                Map<String, File> files = readFilesInDir(theFolder);
+                for (Map.Entry<String, File> fileEntry : files.entrySet()) {
+                    String cellLineFolderName = fileEntry.getKey();
+                    String experimentName = experimentFolderName + "-" + cellLineFolderName;
 
-                String rootFolder = theFolder.getAbsolutePath();
+                    String rootFolder = theFolder.getAbsolutePath();
 
-                // Sample info
-                String sampleInfoPath = rootFolder.concat(cellLineFolderName + "_sample_info.csv")
-                processRNASeqExperimentSampleInfo(new FileReader(sampleInfoPath), experimentName);
+                    // Sample info
+                    String sampleInfoRelativePath = experimentsSampleInfoPath.get(experimentFolderName).replace("FOLDERNAME", cellLineFolderName);
+                    String sampleInfoPath = rootFolder.concat(sampleInfoRelativePath);
+                    //processRNASeqExperimentSampleInfo(new FileReader(sampleInfoPath), experimentName);
 
-                // Gene counts
-                String countsPath = rootFolder.concat("merged_gene_counts.txt")
-                processRNASeqExperimentGeneCount(new FileReader(countsPath), experimentName);
+                    // Gene counts
+                    String geneCountsRelativePath = experimentsGeneCountsPath.get(experimentFolderName).replace("FOLDERNAME", cellLineFolderName);
+                    String countsPath = rootFolder.concat(geneCountsRelativePath);
+                    //processRNASeqExperimentGeneCount(new FileReader(countsPath), experimentName);
 
-                break;
+                    // DESeq2
+                    String DESEQ2RelativePath = experimentsDESEQ2Path.get(experimentFolderName);
+                    String DESEQ2Path = rootFolder.concat("/" + DESEQ2RelativePath);
+                    processRNASeqExperimentDESEQ2(new FileReader(DESEQ2Path), experimentName);
+                }
             }
         }
 
     }
 
-    private void processRNASeqExperimentSampleInfo(Reader reader, String experimentName) throws ObjectStoreException, IOException {
+    private void processConfigFile(Reader reader) throws ObjectStoreException, IOException {
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
+        String[] firstLine = (String[]) lineIter.next();
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+            String experimentFolder = line[0];
+            String experimentSampleInfoPath = line[1];
+            String experimentGeneCountsPath = line[2];
+            String experimentDESEQ2Path = line[3];
+
+            experiments.put(experimentFolder, experimentFolder);
+            experimentsSampleInfoPath.put(experimentFolder, experimentSampleInfoPath);
+            experimentsGeneCountsPath.put(experimentFolder, experimentGeneCountsPath);
+            experimentsDESEQ2Path.put(experimentFolder, experimentDESEQ2Path);
+        }
+    }
+
+    private void processRNASeqExperimentDESEQ2(Reader reader, String experimentName) throws ObjectStoreException, IOException {
+        //
+    }
+
+    /*private void processRNASeqExperimentSampleInfo(Reader reader, String experimentName) throws ObjectStoreException, IOException {
         Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(reader);
         String[] firstLine = (String[]) lineIter.next();
 
@@ -151,7 +201,7 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
     }
 
     private void processRNASeqExperimentGeneCount(Reader reader, String experimentName) throws ObjectStoreException, IOException {
-        Iterator<?> lineIter = FormattedTextParser.parseTsvDelimitedReader(reader);
+        Iterator<?> lineIter = FormattedTextParser.parseTabDelimitedReader(reader);
 
         String[] firstLine = (String[]) lineIter.next();
         ArrayList<String> runs = new ArrayList<String>();
@@ -198,7 +248,7 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                 store(IntegratedItem);
             }
         }
-    }
+    }*/
 
     private Map<String, File> readDirectoriesInDir(File dir) {
         Map<String, File> files = new HashMap<String, File>();

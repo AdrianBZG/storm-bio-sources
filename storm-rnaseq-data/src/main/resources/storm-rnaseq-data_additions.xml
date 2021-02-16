@@ -17,25 +17,25 @@
 
     <class name="RNASeqExperimentGeneCount" is-interface="true">
         <attribute name="experiment" type="java.lang.String"/>
-        <reference name="gene" referenced-type="Gene" reverse-reference="RNASeqExperimentGeneCount"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="RNASeqExperimentGeneCountCollection"/>
         <attribute name="run" type="java.lang.String"/>
         <attribute name="count" type="java.lang.Integer"/>
     </class>
 
     <class name="RNASeqExperimentDESeq2Result" is-interface="true">
         <attribute name="experiment" type="java.lang.String"/>
-        <attribute name="condition" type="java.lang.String"/>
-        <reference name="gene" referenced-type="Gene" reverse-reference="RNASeqExperimentDESeq2Result"/>
+        <attribute name="condition" type="java.lang.String"/> <!-- treatment, control -->
+        <reference name="gene" referenced-type="Gene" reverse-reference="RNASeqExperimentDESeq2ResultCollection"/>
         <attribute name="baseMean" type="java.lang.Double"/>
         <attribute name="log2FoldChange" type="java.lang.Double"/>
         <attribute name="lfcSE" type="java.lang.Double"/>
         <attribute name="stat" type="java.lang.Double"/>
         <attribute name="pvalue" type="java.lang.Double"/>
-        <attribute name="padj" type="java.lang.Double"/>        
+        <attribute name="padj" type="java.lang.Double"/>
     </class>
 
     <class name="Gene" is-interface="true" extends="BioEntity">
-        <collection name="RNASeqExperimentGeneCount" referenced-type="RNASeqExperimentGeneCounts" reverse-reference="gene"/>
-        <collection name="RNASeqExperimentDESeq2Result" referenced-type="RNASeqExperimentDESeq2Results" reverse-reference="gene"/>
+        <collection name="RNASeqExperimentGeneCountCollection" referenced-type="RNASeqExperimentGeneCount" reverse-reference="gene"/>
+        <collection name="RNASeqExperimentDESeq2ResultCollection" referenced-type="RNASeqExperimentDESeq2Result" reverse-reference="gene"/>
     </class>
 </classes>
