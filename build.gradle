@@ -21,7 +21,7 @@ ext {
 
 subprojects {
     group = 'org.intermine'
-    version = '4.2.0'
+    version = '5.0.+'
 
     apply plugin: 'java'
     apply plugin: 'maven'
@@ -144,9 +144,9 @@ subprojects {
             vcsUrl = 'https://github.com/intermine/humanmine-bio-sources.git'
             publicDownloadNumbers = true
             version {
-                name = '4.2.0'
-                desc = 'HumanMine 4.2.0'
-                vcsTag = 'humanmine-4.2.0'
+                name = '5.0.0'
+                desc = 'HumanMine 5.0.0'
+                vcsTag = 'humanmine-5.0.0'
             }
         }
 

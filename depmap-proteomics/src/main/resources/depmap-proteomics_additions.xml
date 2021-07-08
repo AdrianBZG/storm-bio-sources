@@ -4,17 +4,17 @@
 <classes>
     <classes>
         <class name="DepMapProteomics" is-interface="true">
-            <reference name="cellLine" referenced-type="CellLine" reverse-reference="depMapProteomicsCollection"/>
-            <reference name="gene" referenced-type="Gene" reverse-reference="depMapProteomicsCollection"/>
+            <reference name="cellLine" referenced-type="CellLine" reverse-reference="depMapProteomics"/>
+            <reference name="gene" referenced-type="Gene" reverse-reference="depMapProteomics"/>
             <attribute name="ProteinID" type="java.lang.String"/>
-            <attribute name="UniprotID" type="java.lang.String"/>
+            <attribute name="ProteinUniprotID" type="java.lang.String"/>
             <attribute name="ProteinQuantitation" type="java.lang.Double"/>
         </class>
         <class name="Gene" is-interface="true" extends="BioEntity">
-            <collection name="depMapProteomicsCollection" referenced-type="DepMapProteomics" reverse-reference="gene"/>
+            <collection name="depMapProteomics" referenced-type="DepMapProteomics" reverse-reference="gene"/>
         </class>
         <class name="CellLine" is-interface="true" extends="BioEntity">
-            <collection name="depMapProteomicsCollection" referenced-type="DepMapProteomics" reverse-reference="cellLine"/>
+            <collection name="depMapProteomics" referenced-type="DepMapProteomics" reverse-reference="cellLine"/>
         </class>
     </classes>
 </classes>

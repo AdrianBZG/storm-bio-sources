@@ -2,30 +2,25 @@
 <!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
 
 <classes>
-    <class name="RNASeqExperimentSampleInfo" is-interface="true">
-        <attribute name="experiment" type="java.lang.String"/>
-        <attribute name="run" type="java.lang.String"/>
-        <attribute name="sample" type="java.lang.String"/>
-        <attribute name="condition" type="java.lang.String"/>
-        <attribute name="cellLine" type="java.lang.String"/>
-        <attribute name="IFN_gamma" type="java.lang.String"/>
-        <attribute name="compound" type="java.lang.String"/>
-        <attribute name="concentration" type="java.lang.Double"/>
-        <attribute name="replicate" type="java.lang.Integer"/>
-        <attribute name="timepoint" type="java.lang.String"/>
+    <class name="RNASeqExperimentMetadata" is-interface="true">
+        <attribute name="name" type="java.lang.String"/>
+        <attribute name="shortName" type="java.lang.String"/>
+        <attribute name="project" type="java.lang.String"/>
+        <attribute name="contactPerson" type="java.lang.String"/>
+        <attribute name="date" type="java.lang.String"/>
+        <attribute name="sequencing" type="java.lang.String"/>
+        <attribute name="provider" type="java.lang.String"/>
+        <attribute name="dotmaticsReference" type="java.lang.String"/>
+        <collection name="rNASeqExperimentDESeq2Results" referenced-type="RNASeqExperimentDESeq2Result" reverse-reference="experiment"/>
+        <collection name="rNASeqExperimentGeneCounts" referenced-type="RNASeqExperimentGeneCount" reverse-reference="experiment"/>
+        <collection name="rNASeqExperimentMaterials" referenced-type="RNASeqExperimentMaterial" reverse-reference="experiment"/>
+        <collection name="rNASeqExperimentTreatments" referenced-type="RNASeqExperimentTreatment" reverse-reference="experiment"/>
     </class>
-
-    <class name="RNASeqExperimentGeneCount" is-interface="true">
-        <attribute name="experiment" type="java.lang.String"/>
-        <reference name="gene" referenced-type="Gene" reverse-reference="RNASeqExperimentGeneCountCollection"/>
-        <attribute name="run" type="java.lang.String"/>
-        <attribute name="count" type="java.lang.Integer"/>
-    </class>
-
     <class name="RNASeqExperimentDESeq2Result" is-interface="true">
-        <attribute name="experiment" type="java.lang.String"/>
-        <attribute name="condition" type="java.lang.String"/> <!-- treatment, control -->
-        <reference name="gene" referenced-type="Gene" reverse-reference="RNASeqExperimentDESeq2ResultCollection"/>
+        <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="rNASeqExperimentDESeq2Results"/>
+        <attribute name="treatment" type="java.lang.String"/>
+        <attribute name="control" type="java.lang.String"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="rNASeqExperimentDESeq2Results"/>
         <attribute name="baseMean" type="java.lang.Double"/>
         <attribute name="log2FoldChange" type="java.lang.Double"/>
         <attribute name="lfcSE" type="java.lang.Double"/>
@@ -33,9 +28,33 @@
         <attribute name="pvalue" type="java.lang.Double"/>
         <attribute name="padj" type="java.lang.Double"/>
     </class>
-
+    <class name="RNASeqExperimentGeneCount" is-interface="true">
+        <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="rNASeqExperimentGeneCounts"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="rNASeqExperimentGeneCounts"/>
+        <attribute name="run" type="java.lang.String"/>
+        <attribute name="count" type="java.lang.Double"/>
+    </class>
+    <class name="RNASeqExperimentMaterial" is-interface="true">
+        <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="rNASeqExperimentMaterials"/>
+        <attribute name="materialType" type="java.lang.String"/>
+        <attribute name="name" type="java.lang.String"/>
+        <attribute name="primaryDisease" type="java.lang.String"/>
+        <attribute name="diseaseSubtype" type="java.lang.String"/>
+        <attribute name="tissue" type="java.lang.String"/>
+        <attribute name="species" type="java.lang.String"/>
+    </class>
+    <class name="RNASeqExperimentTreatment" is-interface="true">
+        <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="rNASeqExperimentTreatments"/>
+        <attribute name="treatmentType" type="java.lang.String"/>
+        <attribute name="name" type="java.lang.String"/>
+        <attribute name="targetGene" type="java.lang.String"/>
+        <attribute name="dotmaticsReference" type="java.lang.String"/>
+        <attribute name="type" type="java.lang.String"/>
+        <attribute name="dose_concentration" type="java.lang.Double"/>
+        <attribute name="timePoint" type="java.lang.String"/>
+    </class>
     <class name="Gene" is-interface="true" extends="BioEntity">
-        <collection name="RNASeqExperimentGeneCountCollection" referenced-type="RNASeqExperimentGeneCount" reverse-reference="gene"/>
-        <collection name="RNASeqExperimentDESeq2ResultCollection" referenced-type="RNASeqExperimentDESeq2Result" reverse-reference="gene"/>
+        <collection name="rNASeqExperimentGeneCounts" referenced-type="RNASeqExperimentGeneCount" reverse-reference="gene"/>
+        <collection name="rNASeqExperimentDESeq2Results" referenced-type="RNASeqExperimentDESeq2Result" reverse-reference="gene"/>
     </class>
 </classes>

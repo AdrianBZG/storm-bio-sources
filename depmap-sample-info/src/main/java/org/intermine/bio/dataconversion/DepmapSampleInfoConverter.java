@@ -88,6 +88,7 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
                 continue;
             }
 
+            String ShortName = line[1];
             String CCLEname = line[2];
             String Lineage = line[21];
             String LineageSubtype = line[22];
@@ -125,6 +126,12 @@ public class DepmapSampleInfoConverter extends BioDirectoryConverter
                 cellLineItem.setAttribute("CCLEname", CCLEname);
             } else {
                 cellLineItem.setAttribute("CCLEname", "Not specified");
+            }
+
+            if(!ShortName.isEmpty()) {
+                cellLineItem.setAttribute("ShortName", ShortName);
+            } else {
+                cellLineItem.setAttribute("ShortName", "Not specified");
             }
 
             if(!Lineage.isEmpty()) {

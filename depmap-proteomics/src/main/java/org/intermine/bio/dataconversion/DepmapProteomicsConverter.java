@@ -43,6 +43,7 @@ public class DepmapProteomicsConverter extends BioDirectoryConverter
 
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> cellLines = new HashMap<String, String>();
+    private Map<String, String> proteins = new HashMap<String, String>();
 
     protected IdResolver rslv;
     private static final Logger LOG = Logger.getLogger(DepmapProteomicsConverter.class);
@@ -178,7 +179,8 @@ public class DepmapProteomicsConverter extends BioDirectoryConverter
                 }
 
                 if(!uniprotID.isEmpty()) {
-                    integratedItem.setAttribute("UniprotID", uniprotID);
+                    integratedItem.setAttribute("ProteinUniprotID", uniprotID);
+                    //integratedItem.setReference("ProteinUniprotID", getProtein(uniprotID));
                 } else {
                     continue;
                 }
@@ -227,6 +229,22 @@ public class DepmapProteomicsConverter extends BioDirectoryConverter
             id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
         }
         return id;
+    }
+
+    public String getProtein(String identifier) {
+        String refId = proteins.get(identifier);
+        if (refId == null) {
+            Item pr = createItem("Protein");
+            pr.setAttribute("uniprotName", identifier);
+            try {
+                store(pr);
+            } catch (ObjectStoreException e) {
+                throw new RuntimeException("failed to store Protein with uniprotName: " + identifier, e);
+            }
+            refId = pr.getIdentifier();
+            proteins.put(identifier, refId);
+        }
+        return refId;
     }
 
     public String getCellLine(String identifier) {

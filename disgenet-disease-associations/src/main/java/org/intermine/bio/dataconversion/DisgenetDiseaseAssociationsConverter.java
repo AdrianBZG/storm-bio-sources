@@ -148,12 +148,10 @@ public class DisgenetDiseaseAssociationsConverter extends BioDirectoryConverter
 
             String geneSymbol = line[1];
 
-            if(!geneList.isEmpty()) {
-                String resolvedGene = getGeneIdentifier(geneSymbol);
-                if(!geneList.contains(resolvedGene)) {
-                    continue;
-                }
-            }
+            String resolvedGene = getGeneIdentifier(geneSymbol);
+            if(!geneList.isEmpty() && !geneList.contains(resolvedGene)) {
+                continue;
+            }            
 
             String diseaseId = line[4];
             String diseaseName = line[5];
