@@ -433,7 +433,7 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                 String treatmentType = treatmentTypeKeys.get(0);
                 
                 // Get the material object
-                JSONObject treatmentObject = treatmentsJson.getJSONObject(key).getJSONObject(treatmentType);
+                JSONObject treatmentObject = treatmentTypeKeysJSON.getJSONObject(treatmentType);
 
                 switch(treatmentType) {
                     case "inhibitor":

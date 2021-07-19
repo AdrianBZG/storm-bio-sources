@@ -85,17 +85,17 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                     JSONObject jsonObject = new JSONObject(line);
 
                     // Get the experiment key
-                    JSONObject experimentJson = (JSONObject)jsonObject.get("experiment");
+                    JSONObject experimentJson = jsonObject.getJSONObject("experiment");
 
                     // Get the experiment metadata
-                    String experimentName = (String)experimentJson.get("name");
-                    String experimentShortName = (String)experimentJson.get("short name");
-                    String experimentProject = (String)experimentJson.get("project");
-                    String experimentContactPerson = (String)experimentJson.get("contact person");
-                    String experimentDate = (String)experimentJson.get("date");
-                    String experimentSequencing = (String)experimentJson.get("sequencing");
-                    String experimentProvider = (String)experimentJson.get("provider");
-                    String experimentDotmaticsReference = (String)experimentJson.get("Dotmatics reference");
+                    String experimentName = experimentJson.getString("name");
+                    String experimentShortName = experimentJson.getString("short name");
+                    String experimentProject = experimentJson.getString("project");
+                    String experimentContactPerson = experimentJson.getString("contact person");
+                    String experimentDate = experimentJson.getString("date");
+                    String experimentSequencing = experimentJson.getString("sequencing");
+                    String experimentProvider = experimentJson.getString("provider");
+                    String experimentDotmaticsReference = experimentJson.getString("Dotmatics reference");
 
                     // Save the item
                     Item ExperimentMetadataItem = createItem("NanoporeExperimentMetadata");                    
@@ -114,11 +114,11 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                     }
 
                     // Process materials
-                    JSONObject materialsJson = (JSONObject)jsonObject.get("materials");
+                    JSONObject materialsJson = jsonObject.getJSONObject("materials");
                     processExperimentMaterials(materialsJson, experimentShortName);
 
                     // Process treatments
-                    JSONObject treatmentsJson = (JSONObject)jsonObject.get("treatments");
+                    JSONObject treatmentsJson = jsonObject.getJSONObject("treatments");
                     processExperimentTreatments(treatmentsJson, experimentShortName);
 
                     // Process each comparison individually                    
@@ -127,8 +127,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                         JSONObject comparison = experimentComparisons.getJSONObject(i);
                         JSONObject treatmentObject = comparison.getJSONObject("treatment");
                         JSONObject controlObject = comparison.getJSONObject("control");
-                        String treatmentName = (String)treatmentObject.get("name");
-                        String controlName = (String)controlObject.get("name");
+                        String treatmentName = treatmentObject.getString("name");
+                        String controlName = controlObject.getString("name");
                         
                         String comparisonName = treatmentName + "_vs_" + controlName;
                         Map<String, File> filesInDir = readFilesInDir(new File(dataDir.getAbsolutePath() + "/" + experimentShortName + "/" + comparisonName));
@@ -538,7 +538,7 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 String materialType = materialTypeKeys.get(0);
                 
                 // Get the material object
-                JSONObject materialObject = materialsJson.getJSONObject(key).getJSONObject(materialType);
+                JSONObject materialObject = materialTypeKeysJSON.getJSONObject(materialType);
 
                 switch(materialType) {
                     case "cell line":
@@ -631,7 +631,7 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 String treatmentType = treatmentTypeKeys.get(0);
                 
                 // Get the material object
-                JSONObject treatmentObject = treatmentsJson.getJSONObject(key).getJSONObject(treatmentType);
+                JSONObject treatmentObject = treatmentTypeKeysJSON.getJSONObject(treatmentType);
 
                 switch(treatmentType) {
                     case "inhibitor":
