@@ -43,6 +43,8 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
     private static final String EXPRESSION_CSV_FILE = "CCLE_expression.csv";
 
     private Map<String, String> genes = new HashMap<String, String>();
+    private Map<String, String> resolvedGenes = new HashMap<String, String>();
+    private Map<String, String> unresolvableGenes = new HashMap<String, String>();
     private Map<String, String> cellLines = new HashMap<String, String>();
 
     protected IdResolver rslv;
@@ -65,31 +67,17 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                 continue;
             }
 
-            String resolvedGeneIdentifier = getGeneIdentifier(gene);
-            if(resolvedGeneIdentifier != null) {
-                geneListArray.add(resolvedGeneIdentifier);
+            if(unresolvableGenes.get(gene) != null) {
+                continue;
             }
+            String geneId = getGeneId(gene);
+            if(geneId == null) {
+                continue;
+            }
+            geneListArray.add(geneId);
         }
 
         return geneListArray;
-    }
-
-    private String getGeneIdentifier(String geneSymbol) throws ObjectStoreException {
-        String resolvedIdentifier = resolveGene(geneSymbol);
-        if (StringUtils.isEmpty(resolvedIdentifier)) {
-            return null;
-        }
-        String geneId = genes.get(resolvedIdentifier);
-        if (geneId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
-            //gene.setAttribute("symbol", primaryIdentifier);
-            //gene.setReference("organism", getOrganism(TAXON_ID));
-            store(gene);
-            geneId = gene.getIdentifier();
-            genes.put(resolvedIdentifier, geneId);
-        }
-        return geneId;
     }
     //
 
@@ -168,8 +156,14 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                 String theGeneForThisItem = genes.get(i-1);
 
                 if(!geneList.isEmpty()) {
-                    String resolvedGene = getGeneIdentifier(theGeneForThisItem);
-                    if(!geneList.contains(resolvedGene)) {
+                    if(unresolvableGenes.get(theGeneForThisItem) != null) {
+                        continue;
+                    }
+                    String geneId = getGeneId(theGeneForThisItem);
+                    if(geneId == null) {
+                        continue;
+                    }
+                    if(!geneList.contains(geneId)) {
                         continue;
                     }
                 }
@@ -185,9 +179,11 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
                 }
 
                 if(!theGeneForThisItem.isEmpty()) {
+                    if(unresolvableGenes.get(theGeneForThisItem) != null) {
+                        continue;
+                    }
                     String geneId = getGeneId(theGeneForThisItem);
-
-                    if (StringUtils.isEmpty(geneId)) {
+                    if(geneId == null) {
                         continue;
                     }
 
@@ -208,36 +204,44 @@ public class DepmapExpressionConverter extends BioDirectoryConverter
         }
     }
 
-    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
-        String resolvedIdentifier = resolveGene(primaryIdentifier);
-        if (StringUtils.isEmpty(resolvedIdentifier)) {
+    private String getGeneId(String identifier) throws ObjectStoreException {
+        String geneId = null;
+        try {
+            String resolvedIdentifier = resolveGene(identifier);
+            if(resolvedIdentifier != null) {
+                geneId = genes.get(resolvedIdentifier);
+                if (geneId == null) {
+                    Item gene = createItem("Gene");
+                    gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+                    store(gene);
+                    geneId = gene.getIdentifier();
+                    genes.put(resolvedIdentifier, geneId);
+                }
+                return geneId;
+            } else {
+                return resolvedIdentifier;
+            }
+        } catch (Exception e) {
+            LOG.info("getGeneId: failed to resolve gene: " + identifier);
             return null;
         }
-        String geneId = genes.get(resolvedIdentifier);
-        if (geneId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
-            //gene.setAttribute("symbol", primaryIdentifier);
-            //gene.setReference("organism", getOrganism(TAXON_ID));
-            store(gene);
-            geneId = gene.getIdentifier();
-            genes.put(resolvedIdentifier, geneId);
-        }
-        return geneId;
     }
 
     private String resolveGene(String identifier) {
-        String id = identifier;
+        String id = null;
 
-        if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
-            int resCount = rslv.countResolutions(TAXON_ID, identifier);
-            if (resCount != 1) {
-                LOG.info("RESOLVER: failed to resolve gene to one identifier, ignoring gene: "
-                        + identifier + " count: " + resCount + " Human identifier: "
-                        + rslv.resolveId(TAXON_ID, identifier));
-                return null;
+        if(resolvedGenes.get(identifier) != null) {
+            id = resolvedGenes.get(identifier);
+        } else {
+            if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
+                int resCount = rslv.countResolutions(TAXON_ID, identifier);
+                if (resCount != 1) {
+                    unresolvableGenes.put(identifier, identifier);
+                    return null;
+                }
+                id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
+                resolvedGenes.put(identifier, id);
             }
-            id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
         }
         return id;
     }

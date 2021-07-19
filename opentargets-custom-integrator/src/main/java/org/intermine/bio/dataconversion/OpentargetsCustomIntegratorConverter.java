@@ -44,6 +44,8 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
     private static final String ASSOCIATIONS_PAPERS_FILE = "opentargets_papers_storm_targets.csv";
 
     private Map<String, String> genes = new HashMap<String, String>();
+    private Map<String, String> resolvedGenes = new HashMap<String, String>();
+    private Map<String, String> unresolvableGenes = new HashMap<String, String>();
     private Map<String, Item> diseases = new HashMap<String, Item>();
 
     protected IdResolver rslv;
@@ -65,32 +67,19 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
             if(StringUtils.isEmpty(gene)) {
                 continue;
             }
-
-            String resolvedGeneIdentifier = getGeneIdentifier(gene);
+            if(unresolvableGenes.get(gene) != null) {
+                continue;
+            }
+            String resolvedGeneIdentifier = getGeneId(gene);
+            if(resolvedGeneIdentifier == null) {
+                continue;
+            }
             if(resolvedGeneIdentifier != null) {
                 geneListArray.add(resolvedGeneIdentifier);
             }
         }
 
         return geneListArray;
-    }
-
-    private String getGeneIdentifier(String geneSymbol) throws ObjectStoreException {
-        String resolvedIdentifier = resolveGene(geneSymbol);
-        if (StringUtils.isEmpty(resolvedIdentifier)) {
-            return null;
-        }
-        String geneId = genes.get(resolvedIdentifier);
-        if (geneId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
-            //gene.setAttribute("symbol", primaryIdentifier);
-            //gene.setReference("organism", getOrganism(TAXON_ID));
-            store(gene);
-            geneId = gene.getIdentifier();
-            genes.put(resolvedIdentifier, geneId);
-        }
-        return geneId;
     }
     //
 
@@ -146,7 +135,13 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
             String geneSymbol = line[1];
 
             if(!geneList.isEmpty()) {
-                String resolvedGene = getGeneIdentifier(geneSymbol);
+                if(unresolvableGenes.get(geneSymbol) != null) {
+                    continue;
+                }
+                String resolvedGene = getGeneId(geneSymbol);
+                if(resolvedGene == null) {
+                    continue;
+                }
                 if(!geneList.contains(resolvedGene)) {
                     continue;
                 }
@@ -184,9 +179,11 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
                 disease = getDisease(diseaseName);
             }
 
+            if(unresolvableGenes.get(geneSymbol) != null) {
+                continue;
+            }
             String geneId = getGeneId(geneSymbol);
-
-            if (StringUtils.isEmpty(geneId)) {
+            if(geneId == null) {
                 continue;
             }
 
@@ -222,10 +219,17 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
             String geneSymbol = line[1];
 
             if(!geneList.isEmpty()) {
-                String resolvedGene = getGeneIdentifier(geneSymbol);
-                if(!geneList.contains(resolvedGene)) {
+                if(unresolvableGenes.get(geneSymbol) != null) {
                     continue;
                 }
+                String geneId = getGeneId(geneSymbol);
+                if(geneId == null) {
+                    continue;
+                }
+                if(!geneList.contains(geneId)) {
+                    continue;
+                }
+
             }
 
             String diseaseName = line[2];
@@ -256,9 +260,11 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
                 disease = getDisease(diseaseName);
             }
 
+            if(unresolvableGenes.get(geneSymbol) != null) {
+                continue;
+            }
             String geneId = getGeneId(geneSymbol);
-
-            if (StringUtils.isEmpty(geneId)) {
+            if(geneId == null) {
                 continue;
             }
 
@@ -286,36 +292,44 @@ public class OpentargetsCustomIntegratorConverter extends BioDirectoryConverter
         }
     }
 
-    private String getGeneId(String primaryIdentifier) throws ObjectStoreException {
-        String resolvedIdentifier = resolveGene(primaryIdentifier);
-        if (StringUtils.isEmpty(resolvedIdentifier)) {
+    private String getGeneId(String identifier) throws ObjectStoreException {
+        String geneId = null;
+        try {
+            String resolvedIdentifier = resolveGene(identifier);
+            if(resolvedIdentifier != null) {
+                geneId = genes.get(resolvedIdentifier);
+                if (geneId == null) {
+                    Item gene = createItem("Gene");
+                    gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+                    store(gene);
+                    geneId = gene.getIdentifier();
+                    genes.put(resolvedIdentifier, geneId);
+                }
+                return geneId;
+            } else {
+                return resolvedIdentifier;
+            }
+        } catch (Exception e) {
+            LOG.info("getGeneId: failed to resolve gene: " + identifier);
             return null;
         }
-        String geneId = genes.get(resolvedIdentifier);
-        if (geneId == null) {
-            Item gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", resolvedIdentifier);
-            //gene.setAttribute("symbol", primaryIdentifier);
-            //gene.setReference("organism", getOrganism(TAXON_ID));
-            store(gene);
-            geneId = gene.getIdentifier();
-            genes.put(resolvedIdentifier, geneId);
-        }
-        return geneId;
     }
 
     private String resolveGene(String identifier) {
-        String id = identifier;
+        String id = null;
 
-        if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
-            int resCount = rslv.countResolutions(TAXON_ID, identifier);
-            if (resCount != 1) {
-                LOG.info("RESOLVER: failed to resolve gene to one identifier, ignoring gene: "
-                        + identifier + " count: " + resCount + " Human identifier: "
-                        + rslv.resolveId(TAXON_ID, identifier));
-                return null;
+        if(resolvedGenes.get(identifier) != null) {
+            id = resolvedGenes.get(identifier);
+        } else {
+            if (rslv != null && rslv.hasTaxon(TAXON_ID)) {
+                int resCount = rslv.countResolutions(TAXON_ID, identifier);
+                if (resCount != 1) {
+                    unresolvableGenes.put(identifier, identifier);
+                    return null;
+                }
+                id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
+                resolvedGenes.put(identifier, id);
             }
-            id = rslv.resolveId(TAXON_ID, identifier).iterator().next();
         }
         return id;
     }

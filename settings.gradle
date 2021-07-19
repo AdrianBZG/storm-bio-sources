@@ -33,5 +33,7 @@ include ':bio-source-storm-targets-correlations'
 project(':bio-source-storm-targets-correlations').projectDir = new File(settingsDir, './storm-targets-correlations')
 include ':bio-source-storm-rnaseq-data'
 project(':bio-source-storm-rnaseq-data').projectDir = new File(settingsDir, './storm-rnaseq-data')
+include ':bio-source-storm-nanopore-data'
+project(':bio-source-storm-nanopore-data').projectDir = new File(settingsDir, './storm-nanopore-data')
 include ':bio-source-depmap-proteomics'
 project(':bio-source-depmap-proteomics').projectDir = new File(settingsDir, './depmap-proteomics')

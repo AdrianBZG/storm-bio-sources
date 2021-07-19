@@ -10,13 +10,13 @@ package org.intermine.bio.dataconversion;
  *
  */
 
-public class OpentargetsDataConverterTest extends ItemsTestCase
+public class StormNanoporeDataConverterTest extends ItemsTestCase
 {
     Model model = Model.getInstanceByName("genomic");
-    OpentargetsDataConverter converter;
+    StormNanoporeDataConverter converter;
     MockItemWriter itemWriter;
 
-    public OpentargetsDataConverterTest(String arg) {
+    public StormNanoporeDataConverterTest(String arg) {
         super(arg);
     }
 
