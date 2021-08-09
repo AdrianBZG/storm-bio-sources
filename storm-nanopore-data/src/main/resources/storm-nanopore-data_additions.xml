@@ -15,11 +15,15 @@
         <collection name="nanoPoreExperimentSigResults" referenced-type="NanoporeExperimentSigResults" reverse-reference="experiment"/>
         <collection name="nanoPoreExperimentTranscriptCounts" referenced-type="NanoporeExperimentTranscriptCounts" reverse-reference="experiment"/>
         <collection name="nanoPoreExperimentNanocompores" referenced-type="NanoporeExperimentNanocompore" reverse-reference="experiment"/>
+        <collection name="nanoPoreExperimentConditions" referenced-type="NanoporeExperimentCondition" reverse-reference="experiment"/>
         <collection name="nanoPoreExperimentMaterials" referenced-type="NanoporeExperimentMaterial" reverse-reference="experiment"/>
         <collection name="nanoPoreExperimentTreatments" referenced-type="NanoporeExperimentTreatment" reverse-reference="experiment"/>
     </class>
     <class name="NanoporeExperimentInsigResults" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentInsigResults"/>
+        <reference name="treatment" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="control" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="nanoPoreExperimentInsigResults"/>
         <attribute name="transcript" type="java.lang.String"/>
         <attribute name="baseMean" type="java.lang.Double"/>
         <attribute name="log2FoldChange" type="java.lang.Double"/>
@@ -35,6 +39,9 @@
     </class>
     <class name="NanoporeExperimentSigResults" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentSigResults"/>
+        <reference name="treatment" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="control" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="nanoPoreExperimentSigResults"/>
         <attribute name="transcript" type="java.lang.String"/>
         <attribute name="baseMean" type="java.lang.Double"/>
         <attribute name="log2FoldChange" type="java.lang.Double"/>
@@ -50,6 +57,9 @@
     </class>
     <class name="NanoporeExperimentTranscriptCounts" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentTranscriptCounts"/>
+        <reference name="treatment" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="control" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="nanoPoreExperimentTranscriptCounts"/>
         <attribute name="transcript" type="java.lang.String"/>
         <attribute name="BC1" type="java.lang.Double"/>
         <attribute name="BC2" type="java.lang.Double"/>
@@ -58,6 +68,8 @@
     </class>
     <class name="NanoporeExperimentNanocompore" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentNanocompores"/>
+        <reference name="treatment" referenced-type="NanoporeExperimentCondition"/>
+        <reference name="control" referenced-type="NanoporeExperimentCondition"/>
         <attribute name="pos" type="java.lang.Double"/>
         <attribute name="ref_id" type="java.lang.String"/>
         <attribute name="ref_kmer" type="java.lang.String"/>
@@ -71,6 +83,13 @@
         <attribute name="Anova_delta_logit" type="java.lang.Double"/>
         <attribute name="Logit_LOR" type="java.lang.Double"/>        
     </class>
+    <class name="NanoporeExperimentCondition" is-interface="true">
+        <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentConditions"/>
+        <attribute name="name" type="java.lang.String"/>
+        <reference name="material" referenced-type="NanoporeExperimentMaterial" reverse-reference="conditions"/>
+        <attribute name="treatments" type="java.lang.String"/>
+        <attribute name="samples" type="java.lang.String"/>
+    </class>
     <class name="NanoporeExperimentMaterial" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentMaterials"/>
         <attribute name="materialType" type="java.lang.String"/>
@@ -79,6 +98,7 @@
         <attribute name="diseaseSubtype" type="java.lang.String"/>
         <attribute name="tissue" type="java.lang.String"/>
         <attribute name="species" type="java.lang.String"/>
+        <collection name="conditions" referenced-type="NanoporeExperimentCondition" reverse-reference="material"/>
     </class>
     <class name="NanoporeExperimentTreatment" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentTreatments"/>
@@ -89,5 +109,10 @@
         <attribute name="type" type="java.lang.String"/>
         <attribute name="dose_concentration" type="java.lang.Double"/>
         <attribute name="timePoint" type="java.lang.String"/>
+    </class>
+    <class name="Gene" is-interface="true" extends="BioEntity">
+        <collection name="nanoPoreExperimentInsigResults" referenced-type="NanoporeExperimentInsigResults" reverse-reference="gene"/>
+        <collection name="nanoPoreExperimentSigResults" referenced-type="NanoporeExperimentSigResults" reverse-reference="gene"/>
+        <collection name="nanoPoreExperimentTranscriptCounts" referenced-type="NanoporeExperimentTranscriptCounts" reverse-reference="gene"/>
     </class>
 </classes>
