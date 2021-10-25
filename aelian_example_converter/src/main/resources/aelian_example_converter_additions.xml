@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<classes>
+    <class name="AelianData" is-interface="true">
+        <reference name="gene1" referenced-type="Gene" reverse-reference="aelianData1"/>
+        <attribute name="p_val" type="java.lang.Double"/>
+        <attribute name="avg_log2FC" type="java.lang.Double"/>
+        <attribute name="p_val_adj" type="java.lang.Double"/>
+        <reference name="gene2" referenced-type="Gene" reverse-reference="aelianData2"/>
+    </class>
+    <class name="Gene" is-interface="true" extends="BioEntity">
+        <collection name="aelianData1" referenced-type="AelianData" reverse-reference="gene1"/>
+        <collection name="aelianData2" referenced-type="AelianData" reverse-reference="gene2"/>
+    </class>
+</classes>

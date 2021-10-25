@@ -32,10 +32,10 @@
         <attribute name="pvalue" type="java.lang.Double"/>
         <attribute name="padj" type="java.lang.Double"/>
         <attribute name="FoldChange" type="java.lang.Double"/>
-        <attribute name="BC1" type="java.lang.Double"/>
-        <attribute name="BC2" type="java.lang.Double"/>
-        <attribute name="BC3" type="java.lang.Double"/>
-        <attribute name="BC4" type="java.lang.Double"/>
+        <attribute name="ControlReplicate1" type="java.lang.Double"/>
+        <attribute name="ControlReplicate2" type="java.lang.Double"/>
+        <attribute name="TreatmentReplicate1" type="java.lang.Double"/>
+        <attribute name="TreatmentReplicate2" type="java.lang.Double"/>
     </class>
     <class name="NanoporeExperimentSigResults" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentSigResults"/>
@@ -50,10 +50,10 @@
         <attribute name="pvalue" type="java.lang.Double"/>
         <attribute name="padj" type="java.lang.Double"/>
         <attribute name="FoldChange" type="java.lang.Double"/>
-        <attribute name="BC1" type="java.lang.Double"/>
-        <attribute name="BC2" type="java.lang.Double"/>
-        <attribute name="BC3" type="java.lang.Double"/>
-        <attribute name="BC4" type="java.lang.Double"/>
+        <attribute name="ControlReplicate1" type="java.lang.Double"/>
+        <attribute name="ControlReplicate2" type="java.lang.Double"/>
+        <attribute name="TreatmentReplicate1" type="java.lang.Double"/>
+        <attribute name="TreatmentReplicate2" type="java.lang.Double"/>
     </class>
     <class name="NanoporeExperimentTranscriptCounts" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentTranscriptCounts"/>
@@ -61,10 +61,10 @@
         <reference name="control" referenced-type="NanoporeExperimentCondition"/>
         <reference name="gene" referenced-type="Gene" reverse-reference="nanoPoreExperimentTranscriptCounts"/>
         <attribute name="transcript" type="java.lang.String"/>
-        <attribute name="BC1" type="java.lang.Double"/>
-        <attribute name="BC2" type="java.lang.Double"/>
-        <attribute name="BC3" type="java.lang.Double"/>
-        <attribute name="BC4" type="java.lang.Double"/>
+        <attribute name="ControlReplicate1" type="java.lang.Double"/>
+        <attribute name="ControlReplicate2" type="java.lang.Double"/>
+        <attribute name="TreatmentReplicate1" type="java.lang.Double"/>
+        <attribute name="TreatmentReplicate2" type="java.lang.Double"/>
     </class>
     <class name="NanoporeExperimentNanocompore" is-interface="true">
         <reference name="experiment" referenced-type="NanoporeExperimentMetadata" reverse-reference="nanoPoreExperimentNanocompores"/>
@@ -72,6 +72,8 @@
         <reference name="control" referenced-type="NanoporeExperimentCondition"/>
         <attribute name="pos" type="java.lang.Double"/>
         <attribute name="ref_id" type="java.lang.String"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="nanoPoreExperimentNanocompores"/>
+        <attribute name="transcript" type="java.lang.String"/>
         <attribute name="ref_kmer" type="java.lang.String"/>
         <attribute name="GMM_anova_pvalue" type="java.lang.Double"/>
         <attribute name="GMM_logit_pvalue" type="java.lang.Double"/>
@@ -114,5 +116,6 @@
         <collection name="nanoPoreExperimentInsigResults" referenced-type="NanoporeExperimentInsigResults" reverse-reference="gene"/>
         <collection name="nanoPoreExperimentSigResults" referenced-type="NanoporeExperimentSigResults" reverse-reference="gene"/>
         <collection name="nanoPoreExperimentTranscriptCounts" referenced-type="NanoporeExperimentTranscriptCounts" reverse-reference="gene"/>
+        <collection name="nanoPoreExperimentNanocompores" referenced-type="NanoporeExperimentNanocompore" reverse-reference="gene"/>
     </class>
 </classes>

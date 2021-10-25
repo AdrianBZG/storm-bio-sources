@@ -249,19 +249,19 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 }
 
                 if(!StringUtils.isEmpty(BC1) && isDouble(BC1)) {
-                    IntegratedItem.setAttribute("BC1", BC1);
+                    IntegratedItem.setAttribute("ControlReplicate1", BC1);
                 }
 
                 if(!StringUtils.isEmpty(BC2) && isDouble(BC2)) {
-                    IntegratedItem.setAttribute("BC2", BC2);
+                    IntegratedItem.setAttribute("ControlReplicate2", BC2);
                 }
 
                 if(!StringUtils.isEmpty(BC3) && isDouble(BC3)) {
-                    IntegratedItem.setAttribute("BC3", BC3);
+                    IntegratedItem.setAttribute("TreatmentReplicate1", BC3);
                 }
 
                 if(!StringUtils.isEmpty(BC4) && isDouble(BC4)) {
-                    IntegratedItem.setAttribute("BC4", BC4);
+                    IntegratedItem.setAttribute("TreatmentReplicate2", BC4);
                 }
 
                 IntegratedItem.setReference("experiment", ExperimentMetadataItem);
@@ -317,6 +317,21 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 }
 
                 if(!ref_id.isEmpty()) {
+                    String gene = ref_id.split("\\|")[5];
+                    String transcript = ref_id.split("\\|")[4];
+                    if(!gene.isEmpty()) {
+                        if(unresolvableGenes.get(gene) == null) {                            
+                            String geneId = getGeneId(gene);
+                            if(geneId != null) {
+                                IntegratedItem.setReference("gene", geneId);
+                            }
+                        }
+                    }
+
+                    if(!transcript.isEmpty()) {                        
+                        IntegratedItem.setAttribute("transcript", transcript);
+                    }
+
                     IntegratedItem.setAttribute("ref_id", ref_id);
                 }
 
@@ -451,19 +466,19 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 }
 
                 if(!StringUtils.isEmpty(BC1) && isDouble(BC1)) {
-                    IntegratedItem.setAttribute("BC1", BC1);
+                    IntegratedItem.setAttribute("ControlReplicate1", BC1);
                 }
 
                 if(!StringUtils.isEmpty(BC2) && isDouble(BC2)) {
-                    IntegratedItem.setAttribute("BC2", BC2);
+                    IntegratedItem.setAttribute("ControlReplicate2", BC2);
                 }
 
                 if(!StringUtils.isEmpty(BC3) && isDouble(BC3)) {
-                    IntegratedItem.setAttribute("BC3", BC3);
+                    IntegratedItem.setAttribute("TreatmentReplicate1", BC3);
                 }
 
                 if(!StringUtils.isEmpty(BC4) && isDouble(BC4)) {
-                    IntegratedItem.setAttribute("BC4", BC4);
+                    IntegratedItem.setAttribute("TreatmentReplicate2", BC4);
                 }                
 
                 IntegratedItem.setReference("experiment", ExperimentMetadataItem);
@@ -557,19 +572,19 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 }
 
                 if(!StringUtils.isEmpty(BC1) && isDouble(BC1)) {
-                    IntegratedItem.setAttribute("BC1", BC1);
+                    IntegratedItem.setAttribute("ControlReplicate1", BC1);
                 }
 
                 if(!StringUtils.isEmpty(BC2) && isDouble(BC2)) {
-                    IntegratedItem.setAttribute("BC2", BC2);
+                    IntegratedItem.setAttribute("ControlReplicate2", BC2);
                 }
 
                 if(!StringUtils.isEmpty(BC3) && isDouble(BC3)) {
-                    IntegratedItem.setAttribute("BC3", BC3);
+                    IntegratedItem.setAttribute("TreatmentReplicate1", BC3);
                 }
 
                 if(!StringUtils.isEmpty(BC4) && isDouble(BC4)) {
-                    IntegratedItem.setAttribute("BC4", BC4);
+                    IntegratedItem.setAttribute("TreatmentReplicate2", BC4);
                 }                
 
                 IntegratedItem.setReference("experiment", ExperimentMetadataItem);

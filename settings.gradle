@@ -37,3 +37,7 @@ include ':bio-source-storm-nanopore-data'
 project(':bio-source-storm-nanopore-data').projectDir = new File(settingsDir, './storm-nanopore-data')
 include ':bio-source-depmap-proteomics'
 project(':bio-source-depmap-proteomics').projectDir = new File(settingsDir, './depmap-proteomics')
+include ':bio-source-storm-aelian-data-converter'
+project(':bio-source-storm-aelian-data-converter').projectDir = new File(settingsDir, './storm-aelian-data-converter')
+include ':bio-source-aelian_example_converter'
+project(':bio-source-aelian_example_converter').projectDir = new File(settingsDir, './aelian_example_converter')

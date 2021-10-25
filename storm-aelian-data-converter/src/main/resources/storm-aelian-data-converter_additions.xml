@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<classes>
+    <class name="StormAelianData" is-interface="true">
+        <reference name="marker" referenced-type="Gene" reverse-reference="aelianDataMarker"/>
+        <attribute name="p_val" type="java.lang.Double"/>
+        <attribute name="avg_log2FC" type="java.lang.Double"/>
+        <attribute name="p_val_adj" type="java.lang.Double"/>
+        <reference name="ident" referenced-type="Gene" reverse-reference="aelianDataIdent"/>
+    </class>
+    <class name="Gene" is-interface="true" extends="BioEntity">
+        <collection name="aelianDataMarker" referenced-type="StormAelianData" reverse-reference="marker"/>
+        <collection name="aelianDataIdent" referenced-type="StormAelianData" reverse-reference="ident"/>
+    </class>
+</classes>

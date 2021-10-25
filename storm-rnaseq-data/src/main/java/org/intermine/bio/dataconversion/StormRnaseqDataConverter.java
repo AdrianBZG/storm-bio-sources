@@ -687,19 +687,30 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                     treatmentsArray.add(treatmentsJson.getString(i));
                 }
 
-                String treatments = String.join(", ", treatmentsArray);
+                //String treatments = String.join(", ", treatmentsArray);
 
                 // Save the item
                 Item ConditionMetadataItem = createItem("RNASeqExperimentCondition");
 
-                if(!conditionName.isEmpty()) {
+                if(!treatmentsArray.isEmpty()) {
                     ConditionMetadataItem.setAttribute("name", conditionName);
                 } else {
                     continue;
                 }
 
                 if(!treatments.isEmpty()) {
-                    ConditionMetadataItem.setAttribute("treatments", treatments);
+                    //ConditionMetadataItem.setAttribute("treatments", treatments);
+                    List<String> treatmentsIds = new ArrayList<>();
+
+                    for(int i = 0; i < treatmentsArray.size(); i++) {
+                        String treatmentNameToAdd = treatmentsArray.get(i);
+                        if (treatments.containsKey(treatmentNameToAdd)) {
+                            String treatmentIdToAdd = treatments.get(treatmentNameToAdd).getIdentifier();
+                            treatmentsIds.add(treatmentIdToAdd);
+                        }                        
+                    }
+
+                    ConditionMetadataItem.setCollection("treatments", treatmentsIds);
                 }
 
                 if(!samples.isEmpty()) {
@@ -707,7 +718,7 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                 }
 
                 if(!materialName.isEmpty()) {
-                    if (!materials.containsKey(materialName)) {
+                    if (materials.containsKey(materialName)) {
                         ConditionMetadataItem.setReference("material", materials.get(materialName));
                     }
                 }
