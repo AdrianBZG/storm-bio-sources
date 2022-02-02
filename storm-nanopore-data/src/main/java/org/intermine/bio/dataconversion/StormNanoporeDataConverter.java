@@ -42,6 +42,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
 
     private static final String TAXON_ID = "9606"; // Human Taxon ID
 
+    private static final double MIXED_MODEL_PVALUE_THRESHOLD = 0.1;
+
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> resolvedGenes = new HashMap<String, String>();
     private Map<String, String> unresolvableGenes = new HashMap<String, String>();
@@ -290,6 +292,15 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 String ref_kmer = line[5];
                 String GMM_anova_pvalue = line[6];
                 String GMM_logit_pvalue = line[7];
+
+                if(!StringUtils.isEmpty(GMM_logit_pvalue) && isDouble(GMM_logit_pvalue)) {
+                    if(Double.parseDouble(GMM_logit_pvalue) >= MIXED_MODEL_PVALUE_THRESHOLD) {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+
                 String KS_dwell_pvalue = line[8];
                 String KS_intensity_pvalue = line[9];
                 String GMM_cov_type = line[10];
@@ -336,6 +347,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 }
 
                 if(!ref_kmer.isEmpty()) {
+                    // Clean weird symbols from the ref_kmer
+                    ref_kmer = ref_kmer.replaceAll("!", "");
                     IntegratedItem.setAttribute("ref_kmer", ref_kmer);
                 }
 

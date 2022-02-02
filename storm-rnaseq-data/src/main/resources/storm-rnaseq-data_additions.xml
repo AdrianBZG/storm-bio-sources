@@ -12,7 +12,7 @@
         <attribute name="provider" type="java.lang.String"/>
         <attribute name="dotmaticsReference" type="java.lang.String"/>
         <collection name="rNAseqComparisons" referenced-type="RNASeqExperimentComparison" reverse-reference="experiment"/>
-        <collection name="geneCounts" referenced-type="RNASeqExperimentGeneCount" reverse-reference="experiment"/>
+        <collection name="featureCounts" referenced-type="RNASeqExperimentFeatureCounts" reverse-reference="experiment"/>
         <collection name="conditions" referenced-type="RNASeqExperimentCondition" reverse-reference="experiment"/>
         <collection name="materials" referenced-type="RNASeqExperimentMaterial" reverse-reference="experiment"/>
         <collection name="treatments" referenced-type="RNASeqExperimentTreatment" reverse-reference="experiment"/>
@@ -21,6 +21,7 @@
         <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="rNAseqComparisons"/>
         <reference name="treatment" referenced-type="RNASeqExperimentCondition"/>
         <reference name="control" referenced-type="RNASeqExperimentCondition"/>
+        <attribute name="geneEnsemblId" type="java.lang.String"/>
         <reference name="gene" referenced-type="Gene" reverse-reference="rNAseqComparisons"/>
         <attribute name="baseMean" type="java.lang.Double"/>
         <attribute name="log2FoldChange" type="java.lang.Double"/>
@@ -36,9 +37,10 @@
         <collection name="treatments" referenced-type="RNASeqExperimentTreatment" reverse-reference="conditions"/>
         <attribute name="samples" type="java.lang.String"/>
     </class>
-    <class name="RNASeqExperimentGeneCount" is-interface="true">
-        <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="geneCounts"/>
-        <reference name="gene" referenced-type="Gene" reverse-reference="geneCounts"/>
+    <class name="RNASeqExperimentFeatureCounts" is-interface="true">
+        <reference name="experiment" referenced-type="RNASeqExperimentMetadata" reverse-reference="featureCounts"/>
+        <attribute name="geneEnsemblId" type="java.lang.String"/>
+        <reference name="gene" referenced-type="Gene" reverse-reference="featureCounts"/>
         <attribute name="run" type="java.lang.String"/>
         <attribute name="count" type="java.lang.Double"/>
     </class>
@@ -64,7 +66,7 @@
         <collection name="conditions" referenced-type="RNASeqExperimentCondition" reverse-reference="treatments"/>
     </class>
     <class name="Gene" is-interface="true" extends="BioEntity">
-        <collection name="geneCounts" referenced-type="RNASeqExperimentGeneCount" reverse-reference="gene"/>
+        <collection name="featureCounts" referenced-type="RNASeqExperimentFeatureCounts" reverse-reference="gene"/>
         <collection name="rNAseqComparisons" referenced-type="RNASeqExperimentComparison" reverse-reference="gene"/>
     </class>
 </classes>

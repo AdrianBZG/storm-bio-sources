@@ -755,6 +755,7 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                 String[] line = (String[]) lineIter.next();
 
                 String gene = line[columnIndexes.get("gene").intValue()].split("\\.")[0];
+                String geneEnsemblId = line[0].split("\\.")[0];
                 String baseMean = line[columnIndexes.get("baseMean").intValue()];
                 String log2FoldChange = line[columnIndexes.get("log2FoldChange").intValue()];
                 String lfcSE = line[columnIndexes.get("lfcSE").intValue()];
@@ -775,6 +776,10 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                     IntegratedItem.setReference("gene", geneId);
                 } else {
                     throw new BuildException("[processRNASeqExperimentComparison] gene was empty: " + fileName);
+                }
+
+                if(!geneEnsemblId.isEmpty()) {
+                    IntegratedItem.setAttribute("geneEnsemblId", geneEnsemblId);
                 }
                                
                 if(conditions.containsKey(controlName)) {
@@ -836,11 +841,12 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
 
             String[] line = (String[]) lineIter.next();
             String gene = line[1];
+            String geneEnsemblId = line[0].split("\\.")[0];
             try {
                 for(int i = 2; i < line.length; i++) {
                     String count = line[i];
                     String runForThisItem = runs.get(i-2);
-                    Item IntegratedItem = createItem("RNASeqExperimentGeneCount");
+                    Item IntegratedItem = createItem("RNASeqExperimentFeatureCounts");
                     if(!gene.isEmpty()) {
                         if(unresolvableGenes.get(gene) != null) {
                             continue;
@@ -852,6 +858,10 @@ public class StormRnaseqDataConverter extends BioDirectoryConverter
                         IntegratedItem.setReference("gene", geneId);
                     } else {
                         continue;
+                    }
+
+                    if(!geneEnsemblId.isEmpty()) {
+                        IntegratedItem.setAttribute("geneEnsemblId", geneEnsemblId);
                     }
 
                     if(!StringUtils.isEmpty(runForThisItem)) {
