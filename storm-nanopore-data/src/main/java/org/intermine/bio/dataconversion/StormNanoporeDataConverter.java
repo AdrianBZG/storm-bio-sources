@@ -47,6 +47,12 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> resolvedGenes = new HashMap<String, String>();
     private Map<String, String> unresolvableGenes = new HashMap<String, String>();
+    private Map<String, String> transcripts = new HashMap<String, String>();
+    private Map<String, String> transcriptsMap = new HashMap<String, String>();
+
+    private static final String TRANSCRIPT_TO_NCBI_MAPPING_FILE = "/data/nanopore/transcripts_biomart_conversion.csv";
+    private Map<String, String> transcriptToNCBI = new HashMap<String, String>();
+
     private Map<String, Item> experiments = new HashMap<>();
     private Map<String, Item> materials = new HashMap<>();
     private Map<String, Item> treatments = new HashMap<>();
@@ -64,10 +70,32 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
         }
     }
 
+    private void processTranscriptToNCBIMapping(String mappingFile) throws Exception {
+        File mappingFileF = new File(mappingFile);
+
+        Iterator<?> lineIter = FormattedTextParser.parseCsvDelimitedReader(new FileReader(mappingFileF));
+
+        while (lineIter.hasNext()) {
+            String[] line = (String[]) lineIter.next();
+            String transcriptName = line[4];
+            if(StringUtils.isEmpty(transcriptName)) {
+                continue;
+            }
+            String maneId = line[2];
+            if(StringUtils.isEmpty(maneId)) {
+                continue;
+            }
+            transcriptToNCBI.put(transcriptName, maneId);
+        }
+    }
+
     public void process(File dataDir) throws Exception {
         organismIdentifier = getOrganism(TAXON_ID);
 
         Map<String, File> directories = readDirectoriesInDir(dataDir);
+
+        // Get the transcript name to mRNA seq id mappings
+        processTranscriptToNCBIMapping(TRANSCRIPT_TO_NCBI_MAPPING_FILE);
 
         // Get all JSON config files in the directory and process one by one
         File[] configFilesArray = dataDir.listFiles(new FilenameFilter() {
@@ -224,6 +252,7 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 Item IntegratedItem = createItem("NanoporeExperimentTranscriptCounts");
                 if(!transcript.isEmpty()) {
                     String gene = transcript.split("-")[0];
+
                     if(!gene.isEmpty()) {
                         if(unresolvableGenes.get(gene) == null) {                            
                             String geneId = getGeneId(gene);
@@ -232,8 +261,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                             }
                         }
                     }
-                    
-                    IntegratedItem.setAttribute("transcript", transcript);
+
+                    IntegratedItem.setReference("transcript", getTranscript(transcript));
                 } else {
                     continue;
                 }
@@ -329,7 +358,11 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
 
                 if(!ref_id.isEmpty()) {
                     String gene = ref_id.split("\\|")[5];
-                    String transcript = ref_id.split("\\|")[4];
+                    String transcript = ref_id.split("\\|")[0];
+                    String transcriptSymbol = ref_id.split("\\|")[4];
+
+                    transcriptsMap.put(transcriptSymbol, transcript);
+
                     if(!gene.isEmpty()) {
                         if(unresolvableGenes.get(gene) == null) {                            
                             String geneId = getGeneId(gene);
@@ -340,7 +373,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                     }
 
                     if(!transcript.isEmpty()) {                        
-                        IntegratedItem.setAttribute("transcript", transcript);
+                        //IntegratedItem.setAttribute("transcript", transcript);
+                        IntegratedItem.setReference("transcript", getTranscript(transcriptSymbol));
                     }
 
                     IntegratedItem.setAttribute("ref_id", ref_id);
@@ -425,6 +459,7 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 Item IntegratedItem = createItem("NanoporeExperimentInsigResults");
                 if(!transcript.isEmpty()) {
                     String gene = transcript.split("-")[0];
+
                     if(!gene.isEmpty()) {
                         if(unresolvableGenes.get(gene) == null) {                            
                             String geneId = getGeneId(gene);
@@ -433,7 +468,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                             }
                         }
                     }
-                    IntegratedItem.setAttribute("transcript", transcript);
+                    //IntegratedItem.setAttribute("transcript", transcript);
+                    IntegratedItem.setReference("transcript", getTranscript(transcript));
                 } else {
                     continue;
                 }
@@ -531,6 +567,7 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                 Item IntegratedItem = createItem("NanoporeExperimentSigResults");
                 if(!transcript.isEmpty()) {
                     String gene = transcript.split("-")[0];
+
                     if(!gene.isEmpty()) {
                         if(unresolvableGenes.get(gene) == null) {                            
                             String geneId = getGeneId(gene);
@@ -539,7 +576,8 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
                             }
                         }
                     }
-                    IntegratedItem.setAttribute("transcript", transcript);
+                    //IntegratedItem.setAttribute("transcript", transcript);
+                    IntegratedItem.setReference("transcript", getTranscript(transcript));
                 } else {
                     continue;
                 }
@@ -1084,6 +1122,34 @@ public class StormNanoporeDataConverter extends BioDirectoryConverter
             LOG.info("getGeneId: failed to resolve gene: " + identifier);
             return null;
         }
+    }
+
+    public String getTranscript(String identifier) {
+
+        String primaryIdentifier = null;
+        String secondaryIdentifier = null;
+
+        if(transcriptToNCBI.get(identifier) != null) {
+            primaryIdentifier = transcriptToNCBI.get(identifier);
+            identifier = primaryIdentifier;
+        } else if(transcriptsMap.get(identifier) != null) {
+            secondaryIdentifier = transcriptsMap.get(identifier);
+        }
+
+        String refId = transcripts.get(identifier);
+        if (refId == null) {
+            Item tr = createItem("Transcript");
+            tr.setAttribute("primaryIdentifier", identifier);
+            tr.setAttribute("secondaryIdentifier", secondaryIdentifier);
+            try {
+                store(tr);
+            } catch (ObjectStoreException e) {
+                throw new RuntimeException("failed to store transcripts with primaryIdentifier :" + primaryIdentifier + " and secondaryIdentifier: " + secondaryIdentifier, e);
+            }
+            refId = tr.getIdentifier();
+            transcripts.put(identifier, refId);
+        }
+        return refId;
     }
 
     private String resolveGene(String identifier) {
